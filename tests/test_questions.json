@@ -1,0 +1,91 @@
+{
+  "answerable_questions": [
+    {
+      "id": "Q01",
+      "question": "How many days of annual leave do employees receive per year?",
+      "expected_document": "leave_policy.pdf",
+      "expected_keyword": "20 days"
+    },
+    {
+      "id": "Q02",
+      "question": "How many unused annual leave days can be carried forward into the following year?",
+      "expected_document": "leave_policy.pdf",
+      "expected_keyword": "5 days"
+    },
+    {
+      "id": "Q03",
+      "question": "What is the standard window duration to request a full customer refund?",
+      "expected_document": "refund_policy.pdf",
+      "expected_keyword": "30 days"
+    },
+    {
+      "id": "Q04",
+      "question": "How long does it take to process approved customer refunds back to the payment method?",
+      "expected_document": "refund_policy.pdf",
+      "expected_keyword": "5 to 7 business days"
+    },
+    {
+      "id": "Q05",
+      "question": "What core working hours must remote team members be available online?",
+      "expected_document": "remote_work_policy.pdf",
+      "expected_keyword": "10:00 AM to 4:00 PM"
+    },
+    {
+      "id": "Q06",
+      "question": "How much is the one-time home office setup stipend for remote work?",
+      "expected_document": "remote_work_policy.pdf",
+      "expected_keyword": "$500"
+    },
+    {
+      "id": "Q07",
+      "question": "What is the daily meal allowance cap for business travel expenses?",
+      "expected_document": "expense_policy.pdf",
+      "expected_keyword": "$75"
+    },
+    {
+      "id": "Q08",
+      "question": "Within how many days must expense reports be submitted after returning from business travel?",
+      "expected_document": "expense_policy.pdf",
+      "expected_keyword": "14 days"
+    },
+    {
+      "id": "Q09",
+      "question": "What percentage of health insurance premium costs does the company pay for employees?",
+      "expected_document": "employee_handbook.pdf",
+      "expected_keyword": "85%"
+    },
+    {
+      "id": "Q10",
+      "question": "How much annual learning stipend do employees receive for professional development?",
+      "expected_document": "employee_handbook.pdf",
+      "expected_keyword": "stipend"
+    }
+  ],
+  "unanswerable_questions": [
+    {
+      "id": "UQ01",
+      "question": "What is the annual base salary of the company CEO?",
+      "expected_response": "abstain"
+    },
+    {
+      "id": "UQ02",
+      "question": "What is the projected company stock price for next quarter?",
+      "expected_response": "abstain"
+    },
+    {
+      "id": "UQ03",
+      "question": "Which employees are scheduled to receive promotions next year?",
+      "expected_response": "abstain"
+    },
+    {
+      "id": "UQ04",
+      "question": "What is the total annual revenue of the company's main competitor?",
+      "expected_response": "abstain"
+    },
+    {
+      "id": "UQ05",
+      "question": "What are the exact secret recipes used in the company cafeteria?",
+      "expected_response": "abstain"
+    }
+  ]
+}

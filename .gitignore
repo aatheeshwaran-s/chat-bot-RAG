@@ -1,0 +1,18 @@
+# Environment & secret files
+.env
+
+# Local data & databases
+data/
+data/qdrant/
+
+# Python cache & virtualenv
+__pycache__/
+*.pyc
+.venv/
+env/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# Downloaded models cache
+models/
