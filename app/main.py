@@ -45,7 +45,7 @@ def run_ingestion(chunk_size: int = 500, chunk_overlap: int = 50):
     print("\n=== Ingestion Pipeline Complete! Your RAG vector database is ready ===")
 
 
-def answer_user_query(question: str, department: str = None, top_k: int = 8):
+def answer_user_query(question: str, department: str = None, top_k: int = 8, filename: str = None):
     """
     Single question answer workflow with optional metadata filtering.
     """
@@ -60,7 +60,8 @@ def answer_user_query(question: str, department: str = None, top_k: int = 8):
     retrieved_chunks = store.similarity_search(
         query_vector=q_vector,
         top_k=top_k,
-        filter_department=department
+        filter_department=department,
+        filter_filename=filename
     )
 
     # Step 3: LLM generation & citations
@@ -125,6 +126,7 @@ def main():
     parser_query = subparsers.add_parser("query", help="Ask a question")
     parser_query.add_argument("question", type=str, help="User question string")
     parser_query.add_argument("--department", type=str, default=None, help="Filter by department (e.g. HR, Operations)")
+    parser_query.add_argument("--filename", type=str, default=None, help="Filter results by filename (e.g. SS_Employee_Handbook.pdf)")
 
     # Interactive chat command
     subparsers.add_parser("chat", help="Start interactive CLI chat")
@@ -140,7 +142,7 @@ def main():
     if args.command == "ingest":
         run_ingestion(chunk_size=args.chunk_size, chunk_overlap=args.overlap)
     elif args.command == "query":
-        answer_user_query(args.question, department=args.department)
+        answer_user_query(args.question, department=args.department, filename=args.filename)
     elif args.command == "chat":
         start_interactive_chat()
     elif args.command == "evaluate":
