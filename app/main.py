@@ -2,11 +2,12 @@
 Main CLI Application Controller for the RAG Chatbot Backend.
 
 Provides beginner-friendly commands:
-1. python -m app.main ingest    : Extract text from PDFs, generate embeddings, and index into local Qdrant.
-2. python -m app.main query "..." : Ask a question to the chatbot with optional metadata filters.
-3. python -m app.main chat      : Start an interactive terminal chat session.
-4. python -m app.main evaluate  : Run the automated evaluation benchmark.
-5. python -m app.main experiment: Compare chunking sizes (300 vs 500 vs 1000).
+1. python -m app.main ingest       : Extract text from PDFs, generate embeddings, and index into local Qdrant.
+2. python -m app.main query "..."    : Ask a question to the chatbot with optional metadata filters.
+3. python -m app.main chat         : Start an interactive terminal chat session.
+4. python -m app.main evaluate     : Run Week 4 Failure Separation & hit-rate@3 benchmark.
+5. python -m app.main inspect      : Side-by-side inspection view (Question, Retrieved Chunks, Answer, Diagnosis).
+6. python -m app.main experiment_w4: Single-change hit-rate@3 experiment (Vector vs Hybrid BM25+RRF).
 """
 
 import sys
@@ -16,8 +17,9 @@ from app.ingest import process_all_documents_in_folder
 from app.embeddings import EmbeddingEngine
 from app.retrieval import QdrantVectorStore
 from app.generation import LLMGenerator
-from app.evaluate import evaluate_rag_system
-from app.experiments import run_all_experiments
+from app.evaluate import evaluate_rag_system, run_week4_experiment
+from app.inspection import print_inspection_view
+from app.hybrid import HybridSearchEngine, BM25SearchEngine
 
 
 def run_ingestion(chunk_size: int = 500, chunk_overlap: int = 50):
@@ -45,7 +47,7 @@ def run_ingestion(chunk_size: int = 500, chunk_overlap: int = 50):
     print("\n=== Ingestion Pipeline Complete! Your RAG vector database is ready ===")
 
 
-def answer_user_query(question: str, department: str = None, top_k: int = 8, filename: str = None):
+def answer_user_query(question: str, department: str = None, top_k: int = 5, filename: str = None, mode: str = "vector"):
     """
     Single question answer workflow with optional metadata filtering.
     """
@@ -53,22 +55,26 @@ def answer_user_query(question: str, department: str = None, top_k: int = 8, fil
     store = QdrantVectorStore()
     generator = LLMGenerator()
 
-    # Step 1: Embed question
-    q_vector = engine.embed_text(question)
+    if mode == "hybrid":
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        docs_folder = os.path.join(base_dir, "documents")
+        chunks = process_all_documents_in_folder(docs_folder, chunk_size=500, chunk_overlap=50)
+        hybrid_searcher = HybridSearchEngine(store, engine, chunks)
+        retrieved_chunks = hybrid_searcher.hybrid_search(question, top_k=top_k)
+    else:
+        q_vector = engine.embed_text(question)
+        retrieved_chunks = store.similarity_search(
+            query_vector=q_vector,
+            top_k=top_k,
+            filter_department=department,
+            filter_filename=filename
+        )
 
-    # Step 2: Vector search with optional metadata filter
-    retrieved_chunks = store.similarity_search(
-        query_vector=q_vector,
-        top_k=top_k,
-        filter_department=department,
-        filter_filename=filename
-    )
-
-    # Step 3: LLM generation & citations
     result = generator.generate_answer(question, retrieved_chunks)
 
     print("\n" + "="*60)
     print(f"[QUESTION] : {question}")
+    print(f"[MODE]     : {mode.upper()}")
     if department:
         print(f"[FILTER]   : Department = {department}")
     print("="*60)
@@ -78,6 +84,36 @@ def answer_user_query(question: str, department: str = None, top_k: int = 8, fil
     print("="*60)
 
     return result
+
+
+def inspect_question(question: str, expected_doc: str = None, expected_kw: str = None, mode: str = "hybrid"):
+    """
+    Renders Week 4 visual inspection view for any target question.
+    """
+    engine = EmbeddingEngine()
+    store = QdrantVectorStore()
+    generator = LLMGenerator()
+
+    if mode == "hybrid":
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        docs_folder = os.path.join(base_dir, "documents")
+        all_chunks = process_all_documents_in_folder(docs_folder, chunk_size=500, chunk_overlap=50, verbose=False)
+        searcher = HybridSearchEngine(store, engine, all_chunks)
+        chunks = searcher.hybrid_search(question, top_k=3)
+    else:
+        q_vec = engine.embed_text(question)
+        chunks = store.similarity_search(q_vec, top_k=3)
+
+    response = generator.generate_answer(question, chunks)
+
+    print_inspection_view(
+        question=question,
+        retrieved_chunks=chunks,
+        answer=response["answer"],
+        sources=response["sources"],
+        expected_document=expected_doc,
+        expected_keyword=expected_kw
+    )
 
 
 def start_interactive_chat():
@@ -127,28 +163,34 @@ def main():
     parser_query.add_argument("question", type=str, help="User question string")
     parser_query.add_argument("--department", type=str, default=None, help="Filter by department (e.g. HR, Operations)")
     parser_query.add_argument("--filename", type=str, default=None, help="Filter results by filename (e.g. SS_Employee_Handbook.pdf)")
+    parser_query.add_argument("--mode", type=str, default="hybrid", choices=["vector", "hybrid"], help="Search mode")
+
+    # Inspect command (Week 4 Inspection View)
+    parser_inspect = subparsers.add_parser("inspect", help="Side-by-side inspection view for retrieval & answer")
+    parser_inspect.add_argument("question", type=str, nargs="?", default="What is the daily meal allowance cap for business travel expenses?", help="Question to inspect")
+    parser_inspect.add_argument("--expected-doc", type=str, default="expense_policy.pdf", help="Expected document filename")
+    parser_inspect.add_argument("--expected-kw", type=str, default="$75", help="Expected ground-truth keyword")
+    parser_inspect.add_argument("--mode", type=str, default="hybrid", choices=["vector", "hybrid"], help="Search mode")
 
     # Interactive chat command
     subparsers.add_parser("chat", help="Start interactive CLI chat")
 
     # Evaluate command
     subparsers.add_parser("evaluate", help="Run benchmark evaluation suite")
-
-    # Experiment command
-    subparsers.add_parser("experiment", help="Run chunk size comparison experiment")
+    subparsers.add_parser("experiment_w4", help="Run Week 4 single-change hit-rate@3 experiment")
 
     args = parser.parse_args()
 
     if args.command == "ingest":
         run_ingestion(chunk_size=args.chunk_size, chunk_overlap=args.overlap)
     elif args.command == "query":
-        answer_user_query(args.question, department=args.department, filename=args.filename)
+        answer_user_query(args.question, department=args.department, filename=args.filename, mode=args.mode)
+    elif args.command == "inspect":
+        inspect_question(args.question, expected_doc=args.expected_doc, expected_kw=args.expected_kw, mode=args.mode)
     elif args.command == "chat":
         start_interactive_chat()
-    elif args.command == "evaluate":
-        evaluate_rag_system()
-    elif args.command == "experiment":
-        run_all_experiments()
+    elif args.command in ("evaluate", "experiment_w4"):
+        run_week4_experiment()
     else:
         parser.print_help()
 

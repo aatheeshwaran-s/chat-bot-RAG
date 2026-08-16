@@ -59,6 +59,18 @@
       "question": "How much annual learning stipend do employees receive for professional development?",
       "expected_document": "employee_handbook.pdf",
       "expected_keyword": "stipend"
+    },
+    {
+      "id": "Q11",
+      "question": "What is specified in Section 3 of refund_policy.pdf regarding processing timeline?",
+      "expected_document": "refund_policy.pdf",
+      "expected_keyword": "5 to 7 business days"
+    },
+    {
+      "id": "Q12",
+      "question": "What is the exact personal mileage reimbursement rate per mile?",
+      "expected_document": "expense_policy.pdf",
+      "expected_keyword": "$0.65"
     }
   ],
   "unanswerable_questions": [
