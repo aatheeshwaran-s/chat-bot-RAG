@@ -143,7 +143,8 @@ def chunk_document_pages(
 def process_all_documents_in_folder(
     folder_path: str, 
     chunk_size: int = 500, 
-    chunk_overlap: int = 50
+    chunk_overlap: int = 50,
+    verbose: bool = True
 ) -> list[dict]:
     """
     Scans a folder for all PDF files, extracts page text, and splits into chunks.
@@ -151,13 +152,16 @@ def process_all_documents_in_folder(
     pdf_files = glob.glob(os.path.join(folder_path, "*.pdf"))
     all_chunks = []
 
-    print(f"Found {len(pdf_files)} PDF documents in '{folder_path}'")
+    if verbose:
+        print(f"Found {len(pdf_files)} PDF documents in '{folder_path}'")
 
     for pdf_path in sorted(pdf_files):
-        print(f"  Extracting text from: {os.path.basename(pdf_path)}...")
+        if verbose:
+            print(f"  Extracting text from: {os.path.basename(pdf_path)}...")
         pages = extract_text_from_pdf(pdf_path)
         chunks = chunk_document_pages(pages, chunk_size=chunk_size, chunk_overlap=chunk_overlap)
-        print(f"  -> Generated {len(chunks)} chunks (size={chunk_size}, overlap={chunk_overlap})")
+        if verbose:
+            print(f"  -> Generated {len(chunks)} chunks (size={chunk_size}, overlap={chunk_overlap})")
         all_chunks.extend(chunks)
 
     return all_chunks

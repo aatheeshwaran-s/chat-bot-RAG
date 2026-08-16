@@ -112,8 +112,9 @@ class LLMGenerator:
         """
         # Step 1: Abstention check based on similarity score threshold
         top_score = retrieved_chunks[0].get("score", 0.0) if retrieved_chunks else 0.0
+        is_hybrid_rrf = "rrf_score" in retrieved_chunks[0] if retrieved_chunks else False
         
-        if not retrieved_chunks or top_score < self.score_threshold:
+        if not retrieved_chunks or (not is_hybrid_rrf and top_score < self.score_threshold):
             return {
                 "answer": "I couldn't find that information in the provided company documents.",
                 "sources": "No relevant documents found.",
