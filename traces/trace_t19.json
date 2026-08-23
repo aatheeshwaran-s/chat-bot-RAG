@@ -1,0 +1,49 @@
+{
+  "trace_id": "T19",
+  "timestamp": "2026-08-23T23:41:01.111451",
+  "category_type": "Out-of-Scope / Unanswerable Queries",
+  "question": "What are the secret recipe ingredients used in the office cafeteria?",
+  "search_mode": "hybrid",
+  "top_k": 3,
+  "retrieved_chunks": [
+    {
+      "rank": 1,
+      "filename": "remote_work_policy.pdf",
+      "page": 2,
+      "chunk_id": "REMOTE_WORK_POLICY_P2_C1",
+      "score": 0.032002,
+      "text_snippet": "Section 3: Home Office Equipment Stipend The company provides a one-time home office setup stipend of $500 upon approval of a remote work arrangement. This stipend covers monitors, ergonomic chairs, keyboards, and mice. Section 4: Information Securit"
+    },
+    {
+      "rank": 2,
+      "filename": "SS_Employee_Handbook.pdf",
+      "page": 29,
+      "chunk_id": "SS_EMPLOYEE_HANDBOOK_P29_C1",
+      "score": 0.030777,
+      "text_snippet": "29 f. Sharing confidential material, trade secrets, or proprietary information g. Hacking into unauthorized websites h. Sending or posting information that is defamatory to the Company, its products/services, colleagues and/or customers i. Introducin"
+    },
+    {
+      "rank": 3,
+      "filename": "SS_Employee_Handbook.pdf",
+      "page": 2,
+      "chunk_id": "SS_EMPLOYEE_HANDBOOK_P2_C1",
+      "score": 0.016393,
+      "text_snippet": "2 TABLE OF CONTENTS TABLE OF CONTENTS 2 ADDRESS FROM THE MANAGEMENT\u2019S DESK 5 1. INTRODUCTION 6 1.1. ABOUT SOFT SUAVE 6 1.2. OUR VALUES 6 1.3. OUR MISSION 6 1.4. OUR VISION 6 1.5. PURPOSE OF THE HANDBOOK 7 1.6. SCOPE OF THE HANDBOOK 7 1.7. APPLICABILI"
+    }
+  ],
+  "generated_answer": "I couldn't find that information in the provided company documents.",
+  "sources": "N/A",
+  "ground_truth": {
+    "expected_document": "N/A",
+    "expected_keyword": "abstain",
+    "is_answerable": false
+  },
+  "diagnosis": {
+    "status": "FAIL",
+    "category": "GENERATION_FAILURE",
+    "failure_type": "Failure Type 2 (Hallucinated out-of-scope answer)",
+    "is_retrieval_success": true,
+    "is_answer_success": false,
+    "evidence": "Failed to abstain on unanswerable query."
+  }
+}

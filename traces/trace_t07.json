@@ -1,0 +1,48 @@
+{
+  "trace_id": "T07",
+  "timestamp": "2026-08-23T23:40:44.922511",
+  "category_type": "Specific Section & Process Window Rules",
+  "question": "How many unused annual leave days can be carried forward into the following year?",
+  "search_mode": "hybrid",
+  "top_k": 3,
+  "retrieved_chunks": [
+    {
+      "rank": 1,
+      "filename": "leave_policy.pdf",
+      "page": 2,
+      "chunk_id": "LEAVE_POLICY_P2_C1",
+      "score": 0.048916,
+      "text_snippet": "Section 3: Carry Forward Policy Unused annual leave may be carried forward up to a maximum of 5 days into the following calendar year. Carried-forward leave must be used before March 31st of the new year, or it will be forfeited. Section 4: Sick Leav"
+    },
+    {
+      "rank": 2,
+      "filename": "leave_policy.pdf",
+      "page": 1,
+      "chunk_id": "LEAVE_POLICY_P1_C1",
+      "score": 0.046883,
+      "text_snippet": "Company Leave Policy (2025) Section 1: Annual Leave Entitlement Employees receive 20 days of paid annual leave per calendar year. Annual leave accrues at a rate of 1.66 days per month worked. Full-time employees are eligible for annual leave immediat"
+    },
+    {
+      "rank": 3,
+      "filename": "SS_Employee_Handbook.pdf",
+      "page": 22,
+      "chunk_id": "SS_EMPLOYEE_HANDBOOK_P22_C1",
+      "score": 0.031281,
+      "text_snippet": "22 9.2. ANNUAL LEAVES 9.3. LEAVES ENCASHMENT 9.4. LEAVE PROCEDURE THROUGH ERP a. Total Leaves available to an employee in a calendar year shall be in accordance with the table hereunder. Every month you will have one leave and in January, May and Sep"
+    }
+  ],
+  "generated_answer": "Unused annual leave may be carried forward up to a maximum of 5 days into the following calendar year.",
+  "sources": "- leave_policy.pdf -- Page 2 (Chunk: LEAVE_POLICY_P2_C1)\n- leave_policy.pdf -- Page 1 (Chunk: LEAVE_POLICY_P1_C1)\n- SS_Employee_Handbook.pdf -- Page 22 (Chunk: SS_EMPLOYEE_HANDBOOK_P22_C1)",
+  "ground_truth": {
+    "expected_document": "leave_policy.pdf",
+    "expected_keyword": "5 days",
+    "is_answerable": true
+  },
+  "diagnosis": {
+    "status": "PASS",
+    "category": "SUCCESS",
+    "is_retrieval_success": true,
+    "is_answer_success": true,
+    "evidence": "Correct document 'leave_policy.pdf' retrieved in top-3 and answer contained '5 days'."
+  }
+}

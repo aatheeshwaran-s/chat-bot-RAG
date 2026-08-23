@@ -1,0 +1,48 @@
+{
+  "trace_id": "T11",
+  "timestamp": "2026-08-23T23:40:50.145726",
+  "category_type": "Multi-Condition & Complex Policy Queries",
+  "question": "What is the annual learning stipend for professional development and what activities does it cover?",
+  "search_mode": "hybrid",
+  "top_k": 3,
+  "retrieved_chunks": [
+    {
+      "rank": 1,
+      "filename": "employee_handbook.pdf",
+      "page": 2,
+      "chunk_id": "EMPLOYEE_HANDBOOK_P2_C1",
+      "score": 0.048916,
+      "text_snippet": "Section 3: Health Benefits Overview Full-time employees receive comprehensive medical, dental, and vision insurance starting on their first day of employment. The company pays 85% of premium costs for employees and 60% for dependents. Section 4: Lear"
+    },
+    {
+      "rank": 2,
+      "filename": "remote_work_policy.pdf",
+      "page": 2,
+      "chunk_id": "REMOTE_WORK_POLICY_P2_C1",
+      "score": 0.031498,
+      "text_snippet": "Section 3: Home Office Equipment Stipend The company provides a one-time home office setup stipend of $500 upon approval of a remote work arrangement. This stipend covers monitors, ergonomic chairs, keyboards, and mice. Section 4: Information Securit"
+    },
+    {
+      "rank": 3,
+      "filename": "SS_Employee_Handbook.pdf",
+      "page": 5,
+      "chunk_id": "SS_EMPLOYEE_HANDBOOK_P5_C1",
+      "score": 0.016129,
+      "text_snippet": "5 Dear Employee, We are delighted to have you as a member of Soft Suave Technologies Private Limited. We firmly believe that all our employees are the champions of our growth. It is your intelligence and commitment that will determine the success of "
+    }
+  ],
+  "generated_answer": "Employees receive an annual learning stipend of $1,000 for professional development. This stipend covers activities such as attending industry conferences, enrolling in online courses, or purchasing professional books relevant to their role.",
+  "sources": "- employee_handbook.pdf -- Page 2 (Chunk: EMPLOYEE_HANDBOOK_P2_C1)\n- remote_work_policy.pdf -- Page 2 (Chunk: REMOTE_WORK_POLICY_P2_C1)\n- SS_Employee_Handbook.pdf -- Page 5 (Chunk: SS_EMPLOYEE_HANDBOOK_P5_C1)",
+  "ground_truth": {
+    "expected_document": "employee_handbook.pdf",
+    "expected_keyword": "$1,000",
+    "is_answerable": true
+  },
+  "diagnosis": {
+    "status": "PASS",
+    "category": "SUCCESS",
+    "is_retrieval_success": true,
+    "is_answer_success": true,
+    "evidence": "Correct document 'employee_handbook.pdf' retrieved in top-3 and answer contained '$1,000'."
+  }
+}

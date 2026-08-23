@@ -1,0 +1,48 @@
+{
+  "trace_id": "T12",
+  "timestamp": "2026-08-23T23:40:51.289632",
+  "category_type": "Multi-Condition & Complex Policy Queries",
+  "question": "Under what condition is a medical certificate mandatory for sick leave?",
+  "search_mode": "hybrid",
+  "top_k": 3,
+  "retrieved_chunks": [
+    {
+      "rank": 1,
+      "filename": "leave_policy.pdf",
+      "page": 2,
+      "chunk_id": "LEAVE_POLICY_P2_C1",
+      "score": 0.048916,
+      "text_snippet": "Section 3: Carry Forward Policy Unused annual leave may be carried forward up to a maximum of 5 days into the following calendar year. Carried-forward leave must be used before March 31st of the new year, or it will be forfeited. Section 4: Sick Leav"
+    },
+    {
+      "rank": 2,
+      "filename": "SS_Employee_Handbook.pdf",
+      "page": 25,
+      "chunk_id": "SS_EMPLOYEE_HANDBOOK_P25_C1",
+      "score": 0.047627,
+      "text_snippet": "25 9.9. GUIDELINES TO APPROVE PLANNED/UNPLANNED LEAVES BEFORE APPLYING IN ERP SOFTWARE a. Planned leave a. Upto Two Leaves \u2013 Approval by TL -- Call or Face to Face is mandatory b. More than Two Leaves \u2013 Approval by TL via mail with cc to Manager is m"
+    },
+    {
+      "rank": 3,
+      "filename": "SS_Employee_Handbook.pdf",
+      "page": 17,
+      "chunk_id": "SS_EMPLOYEE_HANDBOOK_P17_C1",
+      "score": 0.030303,
+      "text_snippet": "17 7. ATTENDANCE AND PUNCTUALITY POLICY ESSENTIALS 7.1. ABSENCE INR, only 500 INR will be the employee contribution. The details can be taken from Accounts Team. OBJECTIVE The purpose of this policy is to set forth Soft Suave's practices and procedur"
+    }
+  ],
+  "generated_answer": "A medical certificate is mandatory for sick leave exceeding 2 consecutive days.",
+  "sources": "- leave_policy.pdf -- Page 2 (Chunk: LEAVE_POLICY_P2_C1)\n- SS_Employee_Handbook.pdf -- Page 25 (Chunk: SS_EMPLOYEE_HANDBOOK_P25_C1)\n- SS_Employee_Handbook.pdf -- Page 17 (Chunk: SS_EMPLOYEE_HANDBOOK_P17_C1)",
+  "ground_truth": {
+    "expected_document": "leave_policy.pdf",
+    "expected_keyword": "2 consecutive days",
+    "is_answerable": true
+  },
+  "diagnosis": {
+    "status": "PASS",
+    "category": "SUCCESS",
+    "is_retrieval_success": true,
+    "is_answer_success": true,
+    "evidence": "Correct document 'leave_policy.pdf' retrieved in top-3 and answer contained '2 consecutive days'."
+  }
+}

@@ -1,0 +1,203 @@
+{
+  "total_traces_analyzed": 20,
+  "total_passed": 14,
+  "total_failures": 6,
+  "pass_rate": 70.0,
+  "open_coded_notes": [
+    {
+      "trace_id": "T01",
+      "question": "How many days of annual leave do employees receive per year?",
+      "is_failure": false,
+      "open_coded_note": "Fully accurate response: retrieved 'leave_policy.pdf' and successfully generated exact keyword '20 days'.",
+      "assigned_category_id": null
+    },
+    {
+      "trace_id": "T02",
+      "question": "What is the daily meal allowance cap for business travel expenses?",
+      "is_failure": false,
+      "open_coded_note": "Fully accurate response: retrieved 'expense_policy.pdf' and successfully generated exact keyword '$75'.",
+      "assigned_category_id": null
+    },
+    {
+      "trace_id": "T03",
+      "question": "What is the one-time home office setup stipend for remote work?",
+      "is_failure": false,
+      "open_coded_note": "Fully accurate response: retrieved 'remote_work_policy.pdf' and successfully generated exact keyword '$500'.",
+      "assigned_category_id": null
+    },
+    {
+      "trace_id": "T04",
+      "question": "What percentage of health insurance premium costs does the company pay for employees?",
+      "is_failure": false,
+      "open_coded_note": "Fully accurate response: retrieved 'employee_handbook.pdf' and successfully generated exact keyword '85%'.",
+      "assigned_category_id": null
+    },
+    {
+      "trace_id": "T05",
+      "question": "Within how many days must expense reports be submitted after returning from travel?",
+      "is_failure": false,
+      "open_coded_note": "Fully accurate response: retrieved 'expense_policy.pdf' and successfully generated exact keyword '14 days'.",
+      "assigned_category_id": null
+    },
+    {
+      "trace_id": "T06",
+      "question": "What is specified in Section 3 of refund_policy.pdf regarding processing timeline?",
+      "is_failure": false,
+      "open_coded_note": "Fully accurate response: retrieved 'refund_policy.pdf' and successfully generated exact keyword '5 to 7 business days'.",
+      "assigned_category_id": null
+    },
+    {
+      "trace_id": "T07",
+      "question": "How many unused annual leave days can be carried forward into the following year?",
+      "is_failure": false,
+      "open_coded_note": "Fully accurate response: retrieved 'leave_policy.pdf' and successfully generated exact keyword '5 days'.",
+      "assigned_category_id": null
+    },
+    {
+      "trace_id": "T08",
+      "question": "How far in advance must leave requests exceeding 3 consecutive days be submitted?",
+      "is_failure": true,
+      "open_coded_note": "LLM retrieved correct content but truncated numerical currency/time units from '5 business days' in final answer.",
+      "assigned_category_id": "CAT_C_NUMERIC_PRECISION"
+    },
+    {
+      "trace_id": "T09",
+      "question": "What core hours must remote workers maintain online, and what is the maximum WFH days per week under hybrid schedule?",
+      "is_failure": false,
+      "open_coded_note": "Fully accurate response: retrieved 'remote_work_policy.pdf' and successfully generated exact keyword '10:00 AM to 4:00 PM'.",
+      "assigned_category_id": null
+    },
+    {
+      "trace_id": "T10",
+      "question": "What travel class is required for flights under 6 hours and what is the personal mileage reimbursement rate?",
+      "is_failure": false,
+      "open_coded_note": "Fully accurate response: retrieved 'expense_policy.pdf' and successfully generated exact keyword 'Economy class'.",
+      "assigned_category_id": null
+    },
+    {
+      "trace_id": "T11",
+      "question": "What is the annual learning stipend for professional development and what activities does it cover?",
+      "is_failure": false,
+      "open_coded_note": "Fully accurate response: retrieved 'employee_handbook.pdf' and successfully generated exact keyword '$1,000'.",
+      "assigned_category_id": null
+    },
+    {
+      "trace_id": "T12",
+      "question": "Under what condition is a medical certificate mandatory for sick leave?",
+      "is_failure": false,
+      "open_coded_note": "Fully accurate response: retrieved 'leave_policy.pdf' and successfully generated exact keyword '2 consecutive days'.",
+      "assigned_category_id": null
+    },
+    {
+      "trace_id": "T13",
+      "question": "Are digital download software licenses eligible for a refund under Section 2?",
+      "is_failure": false,
+      "open_coded_note": "Fully accurate response: retrieved 'refund_policy.pdf' and successfully generated exact keyword 'non-refundable'.",
+      "assigned_category_id": null
+    },
+    {
+      "trace_id": "T14",
+      "question": "How long is the initial probationary period before an employee can apply for remote work eligibility?",
+      "is_failure": false,
+      "open_coded_note": "Fully accurate response: retrieved 'remote_work_policy.pdf' and successfully generated exact keyword '90-day'.",
+      "assigned_category_id": null
+    },
+    {
+      "trace_id": "T15",
+      "question": "What VPN tool is required for remote workers when connecting to corporate networks?",
+      "is_failure": true,
+      "open_coded_note": "Correct chunk from 'remote_work_policy.pdf' was retrieved, but LLM missed secondary multi-condition clause 'VPN'.",
+      "assigned_category_id": "CAT_A_CONTEXT_SPLIT"
+    },
+    {
+      "trace_id": "T16",
+      "question": "How many weeks of fully paid parental leave are provided for primary caregivers?",
+      "is_failure": false,
+      "open_coded_note": "Fully accurate response: retrieved 'leave_policy.pdf' and successfully generated exact keyword '12 weeks'.",
+      "assigned_category_id": null
+    },
+    {
+      "trace_id": "T17",
+      "question": "What is the exact annual base salary and performance bonus structure of the company CEO?",
+      "is_failure": true,
+      "open_coded_note": "System hallucinated a speculative answer to an unanswerable out-of-scope question instead of abstaining.",
+      "assigned_category_id": "CAT_D_SAFETY_LEAKAGE"
+    },
+    {
+      "trace_id": "T18",
+      "question": "What is the projected stock price target for the company for next fiscal quarter?",
+      "is_failure": true,
+      "open_coded_note": "System hallucinated a speculative answer to an unanswerable out-of-scope question instead of abstaining.",
+      "assigned_category_id": "CAT_D_SAFETY_LEAKAGE"
+    },
+    {
+      "trace_id": "T19",
+      "question": "What are the secret recipe ingredients used in the office cafeteria?",
+      "is_failure": true,
+      "open_coded_note": "System hallucinated a speculative answer to an unanswerable out-of-scope question instead of abstaining.",
+      "assigned_category_id": "CAT_D_SAFETY_LEAKAGE"
+    },
+    {
+      "trace_id": "T20",
+      "question": "Which internal employees are scheduled for corporate promotions next quarter?",
+      "is_failure": true,
+      "open_coded_note": "System hallucinated a speculative answer to an unanswerable out-of-scope question instead of abstaining.",
+      "assigned_category_id": "CAT_D_SAFETY_LEAKAGE"
+    }
+  ],
+  "ranked_taxonomy": [
+    {
+      "category_id": "CAT_D_SAFETY_LEAKAGE",
+      "name": "Out-of-Scope Safety Leakage / Guessing",
+      "description": "LLM attempts to speculate or answer unanswerable out-of-scope queries instead of cleanly abstaining.",
+      "frequency": 4,
+      "severity": 5,
+      "risk_score": 20,
+      "recommended_fix": "Add explicit strict abstention system prompt guardrails for out-of-scope domain questions."
+    },
+    {
+      "category_id": "CAT_A_CONTEXT_SPLIT",
+      "name": "Chunk Boundary Context Fragmentation",
+      "description": "Multi-condition policy rules span across chunk splits, causing LLM to miss secondary clauses.",
+      "frequency": 1,
+      "severity": 4,
+      "risk_score": 4,
+      "recommended_fix": "Increase chunk size from 500 to 750 words with 100 word overlap, or use document section grouping."
+    },
+    {
+      "category_id": "CAT_C_NUMERIC_PRECISION",
+      "name": "Numeric Precision & Unit Truncation",
+      "description": "LLM answers with raw numbers missing currency symbols ($), timeline units (business days vs calendar days), or percentage signs.",
+      "frequency": 1,
+      "severity": 3,
+      "risk_score": 3,
+      "recommended_fix": "Update generation prompt to enforce strict exact-match quoting of monetary caps and time units."
+    },
+    {
+      "category_id": "CAT_B_OVER_ABSTENTION",
+      "name": "LLM Over-Abstention / False Negative Refusal",
+      "description": "Right document chunk is fetched, but LLM conservatively claims information is not found.",
+      "frequency": 0,
+      "severity": 4,
+      "risk_score": 0,
+      "recommended_fix": "Refine LLM system prompt instructions to allow subtle semantic matches without false refusal."
+    },
+    {
+      "category_id": "CAT_E_KEYWORD_BLINDSPOT",
+      "name": "Dense Embedding Keyword / Section Blindspot",
+      "description": "Dense vector search misses exact section numbers (e.g. 'Section 3') or technical policy codes.",
+      "frequency": 0,
+      "severity": 3,
+      "risk_score": 0,
+      "recommended_fix": "Integrate BM25 lexical search with RRF fusion to capture exact section identifiers."
+    }
+  ],
+  "chosen_fix_target": {
+    "chosen_target": "Out-of-Scope Safety Leakage / Guessing",
+    "category_id": "CAT_D_SAFETY_LEAKAGE",
+    "baseline_frequency": 4,
+    "baseline_risk_score": 20,
+    "hypothesis": "Implementing the recommended fix (Add explicit strict abstention system prompt guardrails for out-of-scope domain questions.) will eliminate 4 occurrences of Out-of-Scope Safety Leakage / Guessing, boosting system accuracy by approximately 20.0%.",
+    "expected_after_metric": "Pass rate increase from 70.0% to 90.0%."
+  }
+}

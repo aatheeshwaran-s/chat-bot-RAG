@@ -1,0 +1,49 @@
+{
+  "trace_id": "T20",
+  "timestamp": "2026-08-23T23:41:02.332413",
+  "category_type": "Out-of-Scope / Unanswerable Queries",
+  "question": "Which internal employees are scheduled for corporate promotions next quarter?",
+  "search_mode": "hybrid",
+  "top_k": 3,
+  "retrieved_chunks": [
+    {
+      "rank": 1,
+      "filename": "SS_Employee_Handbook.pdf",
+      "page": 25,
+      "chunk_id": "SS_EMPLOYEE_HANDBOOK_P25_C2",
+      "score": 0.016393,
+      "text_snippet": "ONSITE EMPLOYEES \u2013 ATTENDANCE & LEAVE PROCEDURE a. In case of On-Site employees (reporting directly to the client), should inform the respective reporting Authority at least 1 hour before commencement of duty, so that necessary arrangements are made "
+    },
+    {
+      "rank": 2,
+      "filename": "SS_Employee_Handbook.pdf",
+      "page": 17,
+      "chunk_id": "SS_EMPLOYEE_HANDBOOK_P17_C1",
+      "score": 0.016393,
+      "text_snippet": "17 7. ATTENDANCE AND PUNCTUALITY POLICY ESSENTIALS 7.1. ABSENCE INR, only 500 INR will be the employee contribution. The details can be taken from Accounts Team. OBJECTIVE The purpose of this policy is to set forth Soft Suave's practices and procedur"
+    },
+    {
+      "rank": 3,
+      "filename": "SS_Employee_Handbook.pdf",
+      "page": 39,
+      "chunk_id": "SS_EMPLOYEE_HANDBOOK_P39_C3",
+      "score": 0.016129,
+      "text_snippet": "Department \u2013 teamaccounts@softsuave.com We are committed to continuously reviewing and updating our policies and procedures as a part of periodic assessment. Therefore, the Employee Handbook will be periodically revised and is subject to modification"
+    }
+  ],
+  "generated_answer": "I couldn't find that information in the provided company documents.",
+  "sources": "N/A",
+  "ground_truth": {
+    "expected_document": "N/A",
+    "expected_keyword": "abstain",
+    "is_answerable": false
+  },
+  "diagnosis": {
+    "status": "FAIL",
+    "category": "GENERATION_FAILURE",
+    "failure_type": "Failure Type 2 (Hallucinated out-of-scope answer)",
+    "is_retrieval_success": true,
+    "is_answer_success": false,
+    "evidence": "Failed to abstain on unanswerable query."
+  }
+}

@@ -20,6 +20,8 @@ from app.generation import LLMGenerator
 from app.evaluate import evaluate_rag_system, run_week4_experiment
 from app.inspection import print_inspection_view
 from app.hybrid import HybridSearchEngine, BM25SearchEngine
+from app.trace_collector import collect_all_traces
+from app.error_analysis import analyze_all_traces, print_error_analysis_summary
 
 
 def run_ingestion(chunk_size: int = 500, chunk_overlap: int = 50):
@@ -179,6 +181,13 @@ def main():
     subparsers.add_parser("evaluate", help="Run benchmark evaluation suite")
     subparsers.add_parser("experiment_w4", help="Run Week 4 single-change hit-rate@3 experiment")
 
+    # Week 5 Module 3 Tracing & Error Analysis commands
+    parser_collect = subparsers.add_parser("collect_traces", help="Collect 20 query traces for error analysis")
+    parser_collect.add_argument("--mode", type=str, default="hybrid", choices=["vector", "hybrid"], help="Search mode")
+    parser_collect.add_argument("--top-k", type=int, default=3, help="Top K rank window")
+
+    subparsers.add_parser("analyze_errors", help="Run open coding & Frequency x Severity error analysis")
+
     args = parser.parse_args()
 
     if args.command == "ingest":
@@ -191,6 +200,11 @@ def main():
         start_interactive_chat()
     elif args.command in ("evaluate", "experiment_w4"):
         run_week4_experiment()
+    elif args.command == "collect_traces":
+        collect_all_traces(mode=args.mode, top_k=args.top_k)
+    elif args.command == "analyze_errors":
+        rep = analyze_all_traces()
+        print_error_analysis_summary(rep)
     else:
         parser.print_help()
 
