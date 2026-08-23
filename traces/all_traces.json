@@ -1,0 +1,968 @@
+[
+  {
+    "trace_id": "T01",
+    "timestamp": "2026-08-23T23:40:36.231029",
+    "category_type": "Direct Fact Lookup",
+    "question": "How many days of annual leave do employees receive per year?",
+    "search_mode": "hybrid",
+    "top_k": 3,
+    "retrieved_chunks": [
+      {
+        "rank": 1,
+        "filename": "leave_policy.pdf",
+        "page": 1,
+        "chunk_id": "LEAVE_POLICY_P1_C1",
+        "score": 0.048916,
+        "text_snippet": "Company Leave Policy (2025) Section 1: Annual Leave Entitlement Employees receive 20 days of paid annual leave per calendar year. Annual leave accrues at a rate of 1.66 days per month worked. Full-time employees are eligible for annual leave immediat"
+      },
+      {
+        "rank": 2,
+        "filename": "leave_policy.pdf",
+        "page": 2,
+        "chunk_id": "LEAVE_POLICY_P2_C1",
+        "score": 0.047627,
+        "text_snippet": "Section 3: Carry Forward Policy Unused annual leave may be carried forward up to a maximum of 5 days into the following calendar year. Carried-forward leave must be used before March 31st of the new year, or it will be forfeited. Section 4: Sick Leav"
+      },
+      {
+        "rank": 3,
+        "filename": "SS_Employee_Handbook.pdf",
+        "page": 22,
+        "chunk_id": "SS_EMPLOYEE_HANDBOOK_P22_C1",
+        "score": 0.015873,
+        "text_snippet": "22 9.2. ANNUAL LEAVES 9.3. LEAVES ENCASHMENT 9.4. LEAVE PROCEDURE THROUGH ERP a. Total Leaves available to an employee in a calendar year shall be in accordance with the table hereunder. Every month you will have one leave and in January, May and Sep"
+      }
+    ],
+    "generated_answer": "Employees receive 20 days of paid annual leave per calendar year.",
+    "sources": "- leave_policy.pdf -- Page 1 (Chunk: LEAVE_POLICY_P1_C1)\n- leave_policy.pdf -- Page 2 (Chunk: LEAVE_POLICY_P2_C1)\n- SS_Employee_Handbook.pdf -- Page 22 (Chunk: SS_EMPLOYEE_HANDBOOK_P22_C1)",
+    "ground_truth": {
+      "expected_document": "leave_policy.pdf",
+      "expected_keyword": "20 days",
+      "is_answerable": true
+    },
+    "diagnosis": {
+      "status": "PASS",
+      "category": "SUCCESS",
+      "is_retrieval_success": true,
+      "is_answer_success": true,
+      "evidence": "Correct document 'leave_policy.pdf' retrieved in top-3 and answer contained '20 days'."
+    }
+  },
+  {
+    "trace_id": "T02",
+    "timestamp": "2026-08-23T23:40:37.367948",
+    "category_type": "Direct Fact Lookup",
+    "question": "What is the daily meal allowance cap for business travel expenses?",
+    "search_mode": "hybrid",
+    "top_k": 3,
+    "retrieved_chunks": [
+      {
+        "rank": 1,
+        "filename": "expense_policy.pdf",
+        "page": 1,
+        "chunk_id": "EXPENSE_POLICY_P1_C1",
+        "score": 0.048916,
+        "text_snippet": "Company Expense & Travel Policy Section 1: Travel & Business Expenses Employees traveling on authorized company business will be reimbursed for reasonable and necessary travel expenses. Flight bookings must be made in Economy class for trips under 6 "
+      },
+      {
+        "rank": 2,
+        "filename": "expense_policy.pdf",
+        "page": 2,
+        "chunk_id": "EXPENSE_POLICY_P2_C1",
+        "score": 0.047123,
+        "text_snippet": "Section 3: Expense Report Submission Expense reports must be submitted within 14 days of returning from business travel or incurring the expense. Late submissions past 30 days will not be reimbursed without Vice President approval. Section 4: Taxi & "
+      },
+      {
+        "rank": 3,
+        "filename": "SS_Employee_Handbook.pdf",
+        "page": 26,
+        "chunk_id": "SS_EMPLOYEE_HANDBOOK_P26_C1",
+        "score": 0.016129,
+        "text_snippet": "26 10. CLIENT DEPUTATION - COMPENSATION POLICY 11. WORK FROM HOME POLICY c. For Technical Team a. If an employee works on a non working days for a minimum of 8 hours (exclusive of breaks) with appropriate approval and reasons on any new projects apar"
+      }
+    ],
+    "generated_answer": "The daily meal allowance cap for business travel is $75 per day.",
+    "sources": "- expense_policy.pdf -- Page 1 (Chunk: EXPENSE_POLICY_P1_C1)\n- expense_policy.pdf -- Page 2 (Chunk: EXPENSE_POLICY_P2_C1)\n- SS_Employee_Handbook.pdf -- Page 26 (Chunk: SS_EMPLOYEE_HANDBOOK_P26_C1)",
+    "ground_truth": {
+      "expected_document": "expense_policy.pdf",
+      "expected_keyword": "$75",
+      "is_answerable": true
+    },
+    "diagnosis": {
+      "status": "PASS",
+      "category": "SUCCESS",
+      "is_retrieval_success": true,
+      "is_answer_success": true,
+      "evidence": "Correct document 'expense_policy.pdf' retrieved in top-3 and answer contained '$75'."
+    }
+  },
+  {
+    "trace_id": "T03",
+    "timestamp": "2026-08-23T23:40:38.587282",
+    "category_type": "Direct Fact Lookup",
+    "question": "What is the one-time home office setup stipend for remote work?",
+    "search_mode": "hybrid",
+    "top_k": 3,
+    "retrieved_chunks": [
+      {
+        "rank": 1,
+        "filename": "remote_work_policy.pdf",
+        "page": 2,
+        "chunk_id": "REMOTE_WORK_POLICY_P2_C1",
+        "score": 0.048916,
+        "text_snippet": "Section 3: Home Office Equipment Stipend The company provides a one-time home office setup stipend of $500 upon approval of a remote work arrangement. This stipend covers monitors, ergonomic chairs, keyboards, and mice. Section 4: Information Securit"
+      },
+      {
+        "rank": 2,
+        "filename": "remote_work_policy.pdf",
+        "page": 1,
+        "chunk_id": "REMOTE_WORK_POLICY_P1_C1",
+        "score": 0.047627,
+        "text_snippet": "Remote Work Policy Section 1: Remote Work Eligibility Full-time employees who have completed their initial 90-day probationary period are eligible to apply for remote work. Hybrid schedules allow up to 3 work-from-home days per week with manager appr"
+      },
+      {
+        "rank": 3,
+        "filename": "SS_Employee_Handbook.pdf",
+        "page": 26,
+        "chunk_id": "SS_EMPLOYEE_HANDBOOK_P26_C1",
+        "score": 0.046409,
+        "text_snippet": "26 10. CLIENT DEPUTATION - COMPENSATION POLICY 11. WORK FROM HOME POLICY c. For Technical Team a. If an employee works on a non working days for a minimum of 8 hours (exclusive of breaks) with appropriate approval and reasons on any new projects apar"
+      }
+    ],
+    "generated_answer": "The one-time home office setup stipend for remote work is $500.",
+    "sources": "- remote_work_policy.pdf -- Page 2 (Chunk: REMOTE_WORK_POLICY_P2_C1)\n- remote_work_policy.pdf -- Page 1 (Chunk: REMOTE_WORK_POLICY_P1_C1)\n- SS_Employee_Handbook.pdf -- Page 26 (Chunk: SS_EMPLOYEE_HANDBOOK_P26_C1)",
+    "ground_truth": {
+      "expected_document": "remote_work_policy.pdf",
+      "expected_keyword": "$500",
+      "is_answerable": true
+    },
+    "diagnosis": {
+      "status": "PASS",
+      "category": "SUCCESS",
+      "is_retrieval_success": true,
+      "is_answer_success": true,
+      "evidence": "Correct document 'remote_work_policy.pdf' retrieved in top-3 and answer contained '$500'."
+    }
+  },
+  {
+    "trace_id": "T04",
+    "timestamp": "2026-08-23T23:40:40.518855",
+    "category_type": "Direct Fact Lookup",
+    "question": "What percentage of health insurance premium costs does the company pay for employees?",
+    "search_mode": "hybrid",
+    "top_k": 3,
+    "retrieved_chunks": [
+      {
+        "rank": 1,
+        "filename": "employee_handbook.pdf",
+        "page": 2,
+        "chunk_id": "EMPLOYEE_HANDBOOK_P2_C1",
+        "score": 0.048916,
+        "text_snippet": "Section 3: Health Benefits Overview Full-time employees receive comprehensive medical, dental, and vision insurance starting on their first day of employment. The company pays 85% of premium costs for employees and 60% for dependents. Section 4: Lear"
+      },
+      {
+        "rank": 2,
+        "filename": "leave_policy.pdf",
+        "page": 1,
+        "chunk_id": "LEAVE_POLICY_P1_C1",
+        "score": 0.03101,
+        "text_snippet": "Company Leave Policy (2025) Section 1: Annual Leave Entitlement Employees receive 20 days of paid annual leave per calendar year. Annual leave accrues at a rate of 1.66 days per month worked. Full-time employees are eligible for annual leave immediat"
+      },
+      {
+        "rank": 3,
+        "filename": "SS_Employee_Handbook.pdf",
+        "page": 26,
+        "chunk_id": "SS_EMPLOYEE_HANDBOOK_P26_C1",
+        "score": 0.016129,
+        "text_snippet": "26 10. CLIENT DEPUTATION - COMPENSATION POLICY 11. WORK FROM HOME POLICY c. For Technical Team a. If an employee works on a non working days for a minimum of 8 hours (exclusive of breaks) with appropriate approval and reasons on any new projects apar"
+      }
+    ],
+    "generated_answer": "The company pays 85% of health insurance premium costs for employees.",
+    "sources": "- employee_handbook.pdf -- Page 2 (Chunk: EMPLOYEE_HANDBOOK_P2_C1)\n- leave_policy.pdf -- Page 1 (Chunk: LEAVE_POLICY_P1_C1)\n- SS_Employee_Handbook.pdf -- Page 26 (Chunk: SS_EMPLOYEE_HANDBOOK_P26_C1)",
+    "ground_truth": {
+      "expected_document": "employee_handbook.pdf",
+      "expected_keyword": "85%",
+      "is_answerable": true
+    },
+    "diagnosis": {
+      "status": "PASS",
+      "category": "SUCCESS",
+      "is_retrieval_success": true,
+      "is_answer_success": true,
+      "evidence": "Correct document 'employee_handbook.pdf' retrieved in top-3 and answer contained '85%'."
+    }
+  },
+  {
+    "trace_id": "T05",
+    "timestamp": "2026-08-23T23:40:42.466319",
+    "category_type": "Specific Section & Process Window Rules",
+    "question": "Within how many days must expense reports be submitted after returning from travel?",
+    "search_mode": "hybrid",
+    "top_k": 3,
+    "retrieved_chunks": [
+      {
+        "rank": 1,
+        "filename": "expense_policy.pdf",
+        "page": 2,
+        "chunk_id": "EXPENSE_POLICY_P2_C1",
+        "score": 0.048916,
+        "text_snippet": "Section 3: Expense Report Submission Expense reports must be submitted within 14 days of returning from business travel or incurring the expense. Late submissions past 30 days will not be reimbursed without Vice President approval. Section 4: Taxi & "
+      },
+      {
+        "rank": 2,
+        "filename": "expense_policy.pdf",
+        "page": 1,
+        "chunk_id": "EXPENSE_POLICY_P1_C1",
+        "score": 0.047627,
+        "text_snippet": "Company Expense & Travel Policy Section 1: Travel & Business Expenses Employees traveling on authorized company business will be reimbursed for reasonable and necessary travel expenses. Flight bookings must be made in Economy class for trips under 6 "
+      },
+      {
+        "rank": 3,
+        "filename": "refund_policy.pdf",
+        "page": 2,
+        "chunk_id": "REFUND_POLICY_P2_C1",
+        "score": 0.030536,
+        "text_snippet": "Section 3: Processing Refunds Approved refunds will be processed back to the original payment method within 5 to 7 business days. Shipping costs are non-refundable unless the return is due to a verifiable company defect or error. Section 4: Exchanges"
+      }
+    ],
+    "generated_answer": "Expense reports must be submitted within 14 days of returning from business travel.",
+    "sources": "- expense_policy.pdf -- Page 2 (Chunk: EXPENSE_POLICY_P2_C1)\n- expense_policy.pdf -- Page 1 (Chunk: EXPENSE_POLICY_P1_C1)\n- refund_policy.pdf -- Page 2 (Chunk: REFUND_POLICY_P2_C1)",
+    "ground_truth": {
+      "expected_document": "expense_policy.pdf",
+      "expected_keyword": "14 days",
+      "is_answerable": true
+    },
+    "diagnosis": {
+      "status": "PASS",
+      "category": "SUCCESS",
+      "is_retrieval_success": true,
+      "is_answer_success": true,
+      "evidence": "Correct document 'expense_policy.pdf' retrieved in top-3 and answer contained '14 days'."
+    }
+  },
+  {
+    "trace_id": "T06",
+    "timestamp": "2026-08-23T23:40:43.680013",
+    "category_type": "Specific Section & Process Window Rules",
+    "question": "What is specified in Section 3 of refund_policy.pdf regarding processing timeline?",
+    "search_mode": "hybrid",
+    "top_k": 3,
+    "retrieved_chunks": [
+      {
+        "rank": 1,
+        "filename": "refund_policy.pdf",
+        "page": 2,
+        "chunk_id": "REFUND_POLICY_P2_C1",
+        "score": 0.048916,
+        "text_snippet": "Section 3: Processing Refunds Approved refunds will be processed back to the original payment method within 5 to 7 business days. Shipping costs are non-refundable unless the return is due to a verifiable company defect or error. Section 4: Exchanges"
+      },
+      {
+        "rank": 2,
+        "filename": "refund_policy.pdf",
+        "page": 1,
+        "chunk_id": "REFUND_POLICY_P1_C1",
+        "score": 0.031498,
+        "text_snippet": "Customer Refund Policy Section 1: Product Refund Standard Window Customers can request a full refund within 30 days of the original purchase date. To be eligible for a refund, the product must be unused, in its original packaging, and accompanied by "
+      },
+      {
+        "rank": 3,
+        "filename": "SS_Employee_Handbook.pdf",
+        "page": 5,
+        "chunk_id": "SS_EMPLOYEE_HANDBOOK_P5_C1",
+        "score": 0.016129,
+        "text_snippet": "5 Dear Employee, We are delighted to have you as a member of Soft Suave Technologies Private Limited. We firmly believe that all our employees are the champions of our growth. It is your intelligence and commitment that will determine the success of "
+      }
+    ],
+    "generated_answer": "Section 3 of refund_policy.pdf states that approved refunds will be processed back to the original payment method within 5 to 7 business days.",
+    "sources": "- refund_policy.pdf -- Page 2 (Chunk: REFUND_POLICY_P2_C1)\n- refund_policy.pdf -- Page 1 (Chunk: REFUND_POLICY_P1_C1)\n- SS_Employee_Handbook.pdf -- Page 5 (Chunk: SS_EMPLOYEE_HANDBOOK_P5_C1)",
+    "ground_truth": {
+      "expected_document": "refund_policy.pdf",
+      "expected_keyword": "5 to 7 business days",
+      "is_answerable": true
+    },
+    "diagnosis": {
+      "status": "PASS",
+      "category": "SUCCESS",
+      "is_retrieval_success": true,
+      "is_answer_success": true,
+      "evidence": "Correct document 'refund_policy.pdf' retrieved in top-3 and answer contained '5 to 7 business days'."
+    }
+  },
+  {
+    "trace_id": "T07",
+    "timestamp": "2026-08-23T23:40:44.922511",
+    "category_type": "Specific Section & Process Window Rules",
+    "question": "How many unused annual leave days can be carried forward into the following year?",
+    "search_mode": "hybrid",
+    "top_k": 3,
+    "retrieved_chunks": [
+      {
+        "rank": 1,
+        "filename": "leave_policy.pdf",
+        "page": 2,
+        "chunk_id": "LEAVE_POLICY_P2_C1",
+        "score": 0.048916,
+        "text_snippet": "Section 3: Carry Forward Policy Unused annual leave may be carried forward up to a maximum of 5 days into the following calendar year. Carried-forward leave must be used before March 31st of the new year, or it will be forfeited. Section 4: Sick Leav"
+      },
+      {
+        "rank": 2,
+        "filename": "leave_policy.pdf",
+        "page": 1,
+        "chunk_id": "LEAVE_POLICY_P1_C1",
+        "score": 0.046883,
+        "text_snippet": "Company Leave Policy (2025) Section 1: Annual Leave Entitlement Employees receive 20 days of paid annual leave per calendar year. Annual leave accrues at a rate of 1.66 days per month worked. Full-time employees are eligible for annual leave immediat"
+      },
+      {
+        "rank": 3,
+        "filename": "SS_Employee_Handbook.pdf",
+        "page": 22,
+        "chunk_id": "SS_EMPLOYEE_HANDBOOK_P22_C1",
+        "score": 0.031281,
+        "text_snippet": "22 9.2. ANNUAL LEAVES 9.3. LEAVES ENCASHMENT 9.4. LEAVE PROCEDURE THROUGH ERP a. Total Leaves available to an employee in a calendar year shall be in accordance with the table hereunder. Every month you will have one leave and in January, May and Sep"
+      }
+    ],
+    "generated_answer": "Unused annual leave may be carried forward up to a maximum of 5 days into the following calendar year.",
+    "sources": "- leave_policy.pdf -- Page 2 (Chunk: LEAVE_POLICY_P2_C1)\n- leave_policy.pdf -- Page 1 (Chunk: LEAVE_POLICY_P1_C1)\n- SS_Employee_Handbook.pdf -- Page 22 (Chunk: SS_EMPLOYEE_HANDBOOK_P22_C1)",
+    "ground_truth": {
+      "expected_document": "leave_policy.pdf",
+      "expected_keyword": "5 days",
+      "is_answerable": true
+    },
+    "diagnosis": {
+      "status": "PASS",
+      "category": "SUCCESS",
+      "is_retrieval_success": true,
+      "is_answer_success": true,
+      "evidence": "Correct document 'leave_policy.pdf' retrieved in top-3 and answer contained '5 days'."
+    }
+  },
+  {
+    "trace_id": "T08",
+    "timestamp": "2026-08-23T23:40:46.055166",
+    "category_type": "Specific Section & Process Window Rules",
+    "question": "How far in advance must leave requests exceeding 3 consecutive days be submitted?",
+    "search_mode": "hybrid",
+    "top_k": 3,
+    "retrieved_chunks": [
+      {
+        "rank": 1,
+        "filename": "leave_policy.pdf",
+        "page": 2,
+        "chunk_id": "LEAVE_POLICY_P2_C1",
+        "score": 0.048131,
+        "text_snippet": "Section 3: Carry Forward Policy Unused annual leave may be carried forward up to a maximum of 5 days into the following calendar year. Carried-forward leave must be used before March 31st of the new year, or it will be forfeited. Section 4: Sick Leav"
+      },
+      {
+        "rank": 2,
+        "filename": "expense_policy.pdf",
+        "page": 2,
+        "chunk_id": "EXPENSE_POLICY_P2_C1",
+        "score": 0.030536,
+        "text_snippet": "Section 3: Expense Report Submission Expense reports must be submitted within 14 days of returning from business travel or incurring the expense. Late submissions past 30 days will not be reimbursed without Vice President approval. Section 4: Taxi & "
+      },
+      {
+        "rank": 3,
+        "filename": "SS_Employee_Handbook.pdf",
+        "page": 18,
+        "chunk_id": "SS_EMPLOYEE_HANDBOOK_P18_C1",
+        "score": 0.016393,
+        "text_snippet": "18 8. SEPARATION POLICY 8.1. RESIGNATION 7.2. EXCESSIVE ABSENTEEISM 7.3. TARDINESS AND EARLY DEPARTURES 7.4. JOB ABANDONMENT days whether with or without leave, shall be deemed to have resigned from the service. a. Excessive Absenteeism is defined as"
+      }
+    ],
+    "generated_answer": "I couldn't find that information in the provided company documents.",
+    "sources": "N/A",
+    "ground_truth": {
+      "expected_document": "leave_policy.pdf",
+      "expected_keyword": "5 business days",
+      "is_answerable": true
+    },
+    "diagnosis": {
+      "status": "FAIL",
+      "category": "GENERATION_FAILURE",
+      "failure_type": "Failure Type 2 (Right document fetched, wrong answer)",
+      "is_retrieval_success": true,
+      "is_answer_success": false,
+      "evidence": "Right document 'leave_policy.pdf' was fetched at rank #1, but answer missed keyword '5 business days'."
+    }
+  },
+  {
+    "trace_id": "T09",
+    "timestamp": "2026-08-23T23:40:47.517472",
+    "category_type": "Multi-Condition & Complex Policy Queries",
+    "question": "What core hours must remote workers maintain online, and what is the maximum WFH days per week under hybrid schedule?",
+    "search_mode": "hybrid",
+    "top_k": 3,
+    "retrieved_chunks": [
+      {
+        "rank": 1,
+        "filename": "remote_work_policy.pdf",
+        "page": 1,
+        "chunk_id": "REMOTE_WORK_POLICY_P1_C1",
+        "score": 0.048916,
+        "text_snippet": "Remote Work Policy Section 1: Remote Work Eligibility Full-time employees who have completed their initial 90-day probationary period are eligible to apply for remote work. Hybrid schedules allow up to 3 work-from-home days per week with manager appr"
+      },
+      {
+        "rank": 2,
+        "filename": "SS_Employee_Handbook.pdf",
+        "page": 26,
+        "chunk_id": "SS_EMPLOYEE_HANDBOOK_P26_C1",
+        "score": 0.045688,
+        "text_snippet": "26 10. CLIENT DEPUTATION - COMPENSATION POLICY 11. WORK FROM HOME POLICY c. For Technical Team a. If an employee works on a non working days for a minimum of 8 hours (exclusive of breaks) with appropriate approval and reasons on any new projects apar"
+      },
+      {
+        "rank": 3,
+        "filename": "SS_Employee_Handbook.pdf",
+        "page": 27,
+        "chunk_id": "SS_EMPLOYEE_HANDBOOK_P27_C1",
+        "score": 0.031498,
+        "text_snippet": "27 Dos Employees shall Don\u2019ts Employees shall not Ensure that they possess all appropriate and necessary equipment (e.g. laptop, computer, software etc.) and other content required to be fully productive while working from home. Ensure that they are "
+      }
+    ],
+    "generated_answer": "Remote workers must be available and reachable online during core business hours from 10:00 AM to 4:00 PM local time. Under a hybrid schedule, employees can work from home for up to 3 days per week with manager approval.",
+    "sources": "- remote_work_policy.pdf -- Page 1 (Chunk: REMOTE_WORK_POLICY_P1_C1)\n- SS_Employee_Handbook.pdf -- Page 26 (Chunk: SS_EMPLOYEE_HANDBOOK_P26_C1)\n- SS_Employee_Handbook.pdf -- Page 27 (Chunk: SS_EMPLOYEE_HANDBOOK_P27_C1)",
+    "ground_truth": {
+      "expected_document": "remote_work_policy.pdf",
+      "expected_keyword": "10:00 AM to 4:00 PM",
+      "is_answerable": true
+    },
+    "diagnosis": {
+      "status": "PASS",
+      "category": "SUCCESS",
+      "is_retrieval_success": true,
+      "is_answer_success": true,
+      "evidence": "Correct document 'remote_work_policy.pdf' retrieved in top-3 and answer contained '10:00 AM to 4:00 PM'."
+    }
+  },
+  {
+    "trace_id": "T10",
+    "timestamp": "2026-08-23T23:40:48.710834",
+    "category_type": "Multi-Condition & Complex Policy Queries",
+    "question": "What travel class is required for flights under 6 hours and what is the personal mileage reimbursement rate?",
+    "search_mode": "hybrid",
+    "top_k": 3,
+    "retrieved_chunks": [
+      {
+        "rank": 1,
+        "filename": "expense_policy.pdf",
+        "page": 1,
+        "chunk_id": "EXPENSE_POLICY_P1_C1",
+        "score": 0.048916,
+        "text_snippet": "Company Expense & Travel Policy Section 1: Travel & Business Expenses Employees traveling on authorized company business will be reimbursed for reasonable and necessary travel expenses. Flight bookings must be made in Economy class for trips under 6 "
+      },
+      {
+        "rank": 2,
+        "filename": "expense_policy.pdf",
+        "page": 2,
+        "chunk_id": "EXPENSE_POLICY_P2_C1",
+        "score": 0.047627,
+        "text_snippet": "Section 3: Expense Report Submission Expense reports must be submitted within 14 days of returning from business travel or incurring the expense. Late submissions past 30 days will not be reimbursed without Vice President approval. Section 4: Taxi & "
+      },
+      {
+        "rank": 3,
+        "filename": "SS_Employee_Handbook.pdf",
+        "page": 5,
+        "chunk_id": "SS_EMPLOYEE_HANDBOOK_P5_C1",
+        "score": 0.015873,
+        "text_snippet": "5 Dear Employee, We are delighted to have you as a member of Soft Suave Technologies Private Limited. We firmly believe that all our employees are the champions of our growth. It is your intelligence and commitment that will determine the success of "
+      }
+    ],
+    "generated_answer": "For flights under 6 hours, Economy class is required. Personal mileage is reimbursed at a rate of $0.65 per mile.",
+    "sources": "- expense_policy.pdf -- Page 1 (Chunk: EXPENSE_POLICY_P1_C1)\n- expense_policy.pdf -- Page 2 (Chunk: EXPENSE_POLICY_P2_C1)\n- SS_Employee_Handbook.pdf -- Page 5 (Chunk: SS_EMPLOYEE_HANDBOOK_P5_C1)",
+    "ground_truth": {
+      "expected_document": "expense_policy.pdf",
+      "expected_keyword": "Economy class",
+      "is_answerable": true
+    },
+    "diagnosis": {
+      "status": "PASS",
+      "category": "SUCCESS",
+      "is_retrieval_success": true,
+      "is_answer_success": true,
+      "evidence": "Correct document 'expense_policy.pdf' retrieved in top-3 and answer contained 'Economy class'."
+    }
+  },
+  {
+    "trace_id": "T11",
+    "timestamp": "2026-08-23T23:40:50.145726",
+    "category_type": "Multi-Condition & Complex Policy Queries",
+    "question": "What is the annual learning stipend for professional development and what activities does it cover?",
+    "search_mode": "hybrid",
+    "top_k": 3,
+    "retrieved_chunks": [
+      {
+        "rank": 1,
+        "filename": "employee_handbook.pdf",
+        "page": 2,
+        "chunk_id": "EMPLOYEE_HANDBOOK_P2_C1",
+        "score": 0.048916,
+        "text_snippet": "Section 3: Health Benefits Overview Full-time employees receive comprehensive medical, dental, and vision insurance starting on their first day of employment. The company pays 85% of premium costs for employees and 60% for dependents. Section 4: Lear"
+      },
+      {
+        "rank": 2,
+        "filename": "remote_work_policy.pdf",
+        "page": 2,
+        "chunk_id": "REMOTE_WORK_POLICY_P2_C1",
+        "score": 0.031498,
+        "text_snippet": "Section 3: Home Office Equipment Stipend The company provides a one-time home office setup stipend of $500 upon approval of a remote work arrangement. This stipend covers monitors, ergonomic chairs, keyboards, and mice. Section 4: Information Securit"
+      },
+      {
+        "rank": 3,
+        "filename": "SS_Employee_Handbook.pdf",
+        "page": 5,
+        "chunk_id": "SS_EMPLOYEE_HANDBOOK_P5_C1",
+        "score": 0.016129,
+        "text_snippet": "5 Dear Employee, We are delighted to have you as a member of Soft Suave Technologies Private Limited. We firmly believe that all our employees are the champions of our growth. It is your intelligence and commitment that will determine the success of "
+      }
+    ],
+    "generated_answer": "Employees receive an annual learning stipend of $1,000 for professional development. This stipend covers activities such as attending industry conferences, enrolling in online courses, or purchasing professional books relevant to their role.",
+    "sources": "- employee_handbook.pdf -- Page 2 (Chunk: EMPLOYEE_HANDBOOK_P2_C1)\n- remote_work_policy.pdf -- Page 2 (Chunk: REMOTE_WORK_POLICY_P2_C1)\n- SS_Employee_Handbook.pdf -- Page 5 (Chunk: SS_EMPLOYEE_HANDBOOK_P5_C1)",
+    "ground_truth": {
+      "expected_document": "employee_handbook.pdf",
+      "expected_keyword": "$1,000",
+      "is_answerable": true
+    },
+    "diagnosis": {
+      "status": "PASS",
+      "category": "SUCCESS",
+      "is_retrieval_success": true,
+      "is_answer_success": true,
+      "evidence": "Correct document 'employee_handbook.pdf' retrieved in top-3 and answer contained '$1,000'."
+    }
+  },
+  {
+    "trace_id": "T12",
+    "timestamp": "2026-08-23T23:40:51.289632",
+    "category_type": "Multi-Condition & Complex Policy Queries",
+    "question": "Under what condition is a medical certificate mandatory for sick leave?",
+    "search_mode": "hybrid",
+    "top_k": 3,
+    "retrieved_chunks": [
+      {
+        "rank": 1,
+        "filename": "leave_policy.pdf",
+        "page": 2,
+        "chunk_id": "LEAVE_POLICY_P2_C1",
+        "score": 0.048916,
+        "text_snippet": "Section 3: Carry Forward Policy Unused annual leave may be carried forward up to a maximum of 5 days into the following calendar year. Carried-forward leave must be used before March 31st of the new year, or it will be forfeited. Section 4: Sick Leav"
+      },
+      {
+        "rank": 2,
+        "filename": "SS_Employee_Handbook.pdf",
+        "page": 25,
+        "chunk_id": "SS_EMPLOYEE_HANDBOOK_P25_C1",
+        "score": 0.047627,
+        "text_snippet": "25 9.9. GUIDELINES TO APPROVE PLANNED/UNPLANNED LEAVES BEFORE APPLYING IN ERP SOFTWARE a. Planned leave a. Upto Two Leaves \u2013 Approval by TL -- Call or Face to Face is mandatory b. More than Two Leaves \u2013 Approval by TL via mail with cc to Manager is m"
+      },
+      {
+        "rank": 3,
+        "filename": "SS_Employee_Handbook.pdf",
+        "page": 17,
+        "chunk_id": "SS_EMPLOYEE_HANDBOOK_P17_C1",
+        "score": 0.030303,
+        "text_snippet": "17 7. ATTENDANCE AND PUNCTUALITY POLICY ESSENTIALS 7.1. ABSENCE INR, only 500 INR will be the employee contribution. The details can be taken from Accounts Team. OBJECTIVE The purpose of this policy is to set forth Soft Suave's practices and procedur"
+      }
+    ],
+    "generated_answer": "A medical certificate is mandatory for sick leave exceeding 2 consecutive days.",
+    "sources": "- leave_policy.pdf -- Page 2 (Chunk: LEAVE_POLICY_P2_C1)\n- SS_Employee_Handbook.pdf -- Page 25 (Chunk: SS_EMPLOYEE_HANDBOOK_P25_C1)\n- SS_Employee_Handbook.pdf -- Page 17 (Chunk: SS_EMPLOYEE_HANDBOOK_P17_C1)",
+    "ground_truth": {
+      "expected_document": "leave_policy.pdf",
+      "expected_keyword": "2 consecutive days",
+      "is_answerable": true
+    },
+    "diagnosis": {
+      "status": "PASS",
+      "category": "SUCCESS",
+      "is_retrieval_success": true,
+      "is_answer_success": true,
+      "evidence": "Correct document 'leave_policy.pdf' retrieved in top-3 and answer contained '2 consecutive days'."
+    }
+  },
+  {
+    "trace_id": "T13",
+    "timestamp": "2026-08-23T23:40:52.502014",
+    "category_type": "Cross-Document & Edge Case Queries",
+    "question": "Are digital download software licenses eligible for a refund under Section 2?",
+    "search_mode": "hybrid",
+    "top_k": 3,
+    "retrieved_chunks": [
+      {
+        "rank": 1,
+        "filename": "refund_policy.pdf",
+        "page": 1,
+        "chunk_id": "REFUND_POLICY_P1_C1",
+        "score": 0.048916,
+        "text_snippet": "Customer Refund Policy Section 1: Product Refund Standard Window Customers can request a full refund within 30 days of the original purchase date. To be eligible for a refund, the product must be unused, in its original packaging, and accompanied by "
+      },
+      {
+        "rank": 2,
+        "filename": "refund_policy.pdf",
+        "page": 2,
+        "chunk_id": "REFUND_POLICY_P2_C1",
+        "score": 0.031498,
+        "text_snippet": "Section 3: Processing Refunds Approved refunds will be processed back to the original payment method within 5 to 7 business days. Shipping costs are non-refundable unless the return is due to a verifiable company defect or error. Section 4: Exchanges"
+      },
+      {
+        "rank": 3,
+        "filename": "SS_Employee_Handbook.pdf",
+        "page": 39,
+        "chunk_id": "SS_EMPLOYEE_HANDBOOK_P39_C1",
+        "score": 0.030536,
+        "text_snippet": "39 24. CONTACT DETAILS 25. MODIFICATIONS LXXII. Sharing confidential Company information in the social media. LXXIII. Not respecting the property rights of others by never misusing their assets, intellectual property or trade secrets, including the c"
+      }
+    ],
+    "generated_answer": "Digital download software licenses are strictly non-refundable once issued or downloaded, except where required by applicable local consumer law.",
+    "sources": "- refund_policy.pdf -- Page 1 (Chunk: REFUND_POLICY_P1_C1)\n- refund_policy.pdf -- Page 2 (Chunk: REFUND_POLICY_P2_C1)\n- SS_Employee_Handbook.pdf -- Page 39 (Chunk: SS_EMPLOYEE_HANDBOOK_P39_C1)",
+    "ground_truth": {
+      "expected_document": "refund_policy.pdf",
+      "expected_keyword": "non-refundable",
+      "is_answerable": true
+    },
+    "diagnosis": {
+      "status": "PASS",
+      "category": "SUCCESS",
+      "is_retrieval_success": true,
+      "is_answer_success": true,
+      "evidence": "Correct document 'refund_policy.pdf' retrieved in top-3 and answer contained 'non-refundable'."
+    }
+  },
+  {
+    "trace_id": "T14",
+    "timestamp": "2026-08-23T23:40:54.549002",
+    "category_type": "Cross-Document & Edge Case Queries",
+    "question": "How long is the initial probationary period before an employee can apply for remote work eligibility?",
+    "search_mode": "hybrid",
+    "top_k": 3,
+    "retrieved_chunks": [
+      {
+        "rank": 1,
+        "filename": "remote_work_policy.pdf",
+        "page": 1,
+        "chunk_id": "REMOTE_WORK_POLICY_P1_C1",
+        "score": 0.048916,
+        "text_snippet": "Remote Work Policy Section 1: Remote Work Eligibility Full-time employees who have completed their initial 90-day probationary period are eligible to apply for remote work. Hybrid schedules allow up to 3 work-from-home days per week with manager appr"
+      },
+      {
+        "rank": 2,
+        "filename": "SS_Employee_Handbook.pdf",
+        "page": 17,
+        "chunk_id": "SS_EMPLOYEE_HANDBOOK_P17_C1",
+        "score": 0.03101,
+        "text_snippet": "17 7. ATTENDANCE AND PUNCTUALITY POLICY ESSENTIALS 7.1. ABSENCE INR, only 500 INR will be the employee contribution. The details can be taken from Accounts Team. OBJECTIVE The purpose of this policy is to set forth Soft Suave's practices and procedur"
+      },
+      {
+        "rank": 3,
+        "filename": "SS_Employee_Handbook.pdf",
+        "page": 23,
+        "chunk_id": "SS_EMPLOYEE_HANDBOOK_P23_C1",
+        "score": 0.016129,
+        "text_snippet": "23 9.5. SANDWICH RULE 9.6. LESS HOURS REQUEST PROCEDURE in the ERP, without obtaining the prior approval of the TL/Manager shall be subject to disciplinary action. e. In the ERP software, Absent(A) shall be indicated in case an employee takes a leave"
+      }
+    ],
+    "generated_answer": "Full-time employees must complete an initial 90-day probationary period before they are eligible to apply for remote work.",
+    "sources": "- remote_work_policy.pdf -- Page 1 (Chunk: REMOTE_WORK_POLICY_P1_C1)\n- SS_Employee_Handbook.pdf -- Page 17 (Chunk: SS_EMPLOYEE_HANDBOOK_P17_C1)\n- SS_Employee_Handbook.pdf -- Page 23 (Chunk: SS_EMPLOYEE_HANDBOOK_P23_C1)",
+    "ground_truth": {
+      "expected_document": "remote_work_policy.pdf",
+      "expected_keyword": "90-day",
+      "is_answerable": true
+    },
+    "diagnosis": {
+      "status": "PASS",
+      "category": "SUCCESS",
+      "is_retrieval_success": true,
+      "is_answer_success": true,
+      "evidence": "Correct document 'remote_work_policy.pdf' retrieved in top-3 and answer contained '90-day'."
+    }
+  },
+  {
+    "trace_id": "T15",
+    "timestamp": "2026-08-23T23:40:55.681738",
+    "category_type": "Cross-Document & Edge Case Queries",
+    "question": "What VPN tool is required for remote workers when connecting to corporate networks?",
+    "search_mode": "hybrid",
+    "top_k": 3,
+    "retrieved_chunks": [
+      {
+        "rank": 1,
+        "filename": "remote_work_policy.pdf",
+        "page": 2,
+        "chunk_id": "REMOTE_WORK_POLICY_P2_C1",
+        "score": 0.048916,
+        "text_snippet": "Section 3: Home Office Equipment Stipend The company provides a one-time home office setup stipend of $500 upon approval of a remote work arrangement. This stipend covers monitors, ergonomic chairs, keyboards, and mice. Section 4: Information Securit"
+      },
+      {
+        "rank": 2,
+        "filename": "remote_work_policy.pdf",
+        "page": 1,
+        "chunk_id": "REMOTE_WORK_POLICY_P1_C1",
+        "score": 0.047123,
+        "text_snippet": "Remote Work Policy Section 1: Remote Work Eligibility Full-time employees who have completed their initial 90-day probationary period are eligible to apply for remote work. Hybrid schedules allow up to 3 work-from-home days per week with manager appr"
+      },
+      {
+        "rank": 3,
+        "filename": "SS_Employee_Handbook.pdf",
+        "page": 27,
+        "chunk_id": "SS_EMPLOYEE_HANDBOOK_P27_C1",
+        "score": 0.030769,
+        "text_snippet": "27 Dos Employees shall Don\u2019ts Employees shall not Ensure that they possess all appropriate and necessary equipment (e.g. laptop, computer, software etc.) and other content required to be fully productive while working from home. Ensure that they are "
+      }
+    ],
+    "generated_answer": "I couldn't find that information in the provided company documents.",
+    "sources": "N/A",
+    "ground_truth": {
+      "expected_document": "remote_work_policy.pdf",
+      "expected_keyword": "VPN",
+      "is_answerable": true
+    },
+    "diagnosis": {
+      "status": "FAIL",
+      "category": "GENERATION_FAILURE",
+      "failure_type": "Failure Type 2 (Right document fetched, wrong answer)",
+      "is_retrieval_success": true,
+      "is_answer_success": false,
+      "evidence": "Right document 'remote_work_policy.pdf' was fetched at rank #1, but answer missed keyword 'VPN'."
+    }
+  },
+  {
+    "trace_id": "T16",
+    "timestamp": "2026-08-23T23:40:56.904421",
+    "category_type": "Cross-Document & Edge Case Queries",
+    "question": "How many weeks of fully paid parental leave are provided for primary caregivers?",
+    "search_mode": "hybrid",
+    "top_k": 3,
+    "retrieved_chunks": [
+      {
+        "rank": 1,
+        "filename": "leave_policy.pdf",
+        "page": 2,
+        "chunk_id": "LEAVE_POLICY_P2_C1",
+        "score": 0.048916,
+        "text_snippet": "Section 3: Carry Forward Policy Unused annual leave may be carried forward up to a maximum of 5 days into the following calendar year. Carried-forward leave must be used before March 31st of the new year, or it will be forfeited. Section 4: Sick Leav"
+      },
+      {
+        "rank": 2,
+        "filename": "SS_Employee_Handbook.pdf",
+        "page": 24,
+        "chunk_id": "SS_EMPLOYEE_HANDBOOK_P24_C1",
+        "score": 0.031754,
+        "text_snippet": "24 9.7. LEAVE WITHOUT PAY (LWP) 9.8. MATERNITY LEAVE b. All employees with less hours of work shall address the LH by submitting the Less Hours attendance request in the ERP along with valid evidence to support the minimum working hours and getting i"
+      },
+      {
+        "rank": 3,
+        "filename": "leave_policy.pdf",
+        "page": 1,
+        "chunk_id": "LEAVE_POLICY_P1_C1",
+        "score": 0.031025,
+        "text_snippet": "Company Leave Policy (2025) Section 1: Annual Leave Entitlement Employees receive 20 days of paid annual leave per calendar year. Annual leave accrues at a rate of 1.66 days per month worked. Full-time employees are eligible for annual leave immediat"
+      }
+    ],
+    "generated_answer": "Parental leave provides 12 weeks of fully paid leave for primary caregivers.",
+    "sources": "- leave_policy.pdf -- Page 2 (Chunk: LEAVE_POLICY_P2_C1)\n- SS_Employee_Handbook.pdf -- Page 24 (Chunk: SS_EMPLOYEE_HANDBOOK_P24_C1)\n- leave_policy.pdf -- Page 1 (Chunk: LEAVE_POLICY_P1_C1)",
+    "ground_truth": {
+      "expected_document": "leave_policy.pdf",
+      "expected_keyword": "12 weeks",
+      "is_answerable": true
+    },
+    "diagnosis": {
+      "status": "PASS",
+      "category": "SUCCESS",
+      "is_retrieval_success": true,
+      "is_answer_success": true,
+      "evidence": "Correct document 'leave_policy.pdf' retrieved in top-3 and answer contained '12 weeks'."
+    }
+  },
+  {
+    "trace_id": "T17",
+    "timestamp": "2026-08-23T23:40:58.046993",
+    "category_type": "Out-of-Scope / Unanswerable Queries",
+    "question": "What is the exact annual base salary and performance bonus structure of the company CEO?",
+    "search_mode": "hybrid",
+    "top_k": 3,
+    "retrieved_chunks": [
+      {
+        "rank": 1,
+        "filename": "SS_Employee_Handbook.pdf",
+        "page": 2,
+        "chunk_id": "SS_EMPLOYEE_HANDBOOK_P2_C1",
+        "score": 0.032522,
+        "text_snippet": "2 TABLE OF CONTENTS TABLE OF CONTENTS 2 ADDRESS FROM THE MANAGEMENT\u2019S DESK 5 1. INTRODUCTION 6 1.1. ABOUT SOFT SUAVE 6 1.2. OUR VALUES 6 1.3. OUR MISSION 6 1.4. OUR VISION 6 1.5. PURPOSE OF THE HANDBOOK 7 1.6. SCOPE OF THE HANDBOOK 7 1.7. APPLICABILI"
+      },
+      {
+        "rank": 2,
+        "filename": "SS_Employee_Handbook.pdf",
+        "page": 14,
+        "chunk_id": "SS_EMPLOYEE_HANDBOOK_P14_C1",
+        "score": 0.030777,
+        "text_snippet": "14 6.1. EMPLOYEE APPRECIATION d. Policy description: For freshers who have completed 13 months and more at Soft Suave, the appraisal is considered for the one year of employment, and any arrears owed for the remaining month will be processed on a pro"
+      },
+      {
+        "rank": 3,
+        "filename": "leave_policy.pdf",
+        "page": 1,
+        "chunk_id": "LEAVE_POLICY_P1_C1",
+        "score": 0.030536,
+        "text_snippet": "Company Leave Policy (2025) Section 1: Annual Leave Entitlement Employees receive 20 days of paid annual leave per calendar year. Annual leave accrues at a rate of 1.66 days per month worked. Full-time employees are eligible for annual leave immediat"
+      }
+    ],
+    "generated_answer": "I couldn't find that information in the provided company documents.",
+    "sources": "N/A",
+    "ground_truth": {
+      "expected_document": "N/A",
+      "expected_keyword": "abstain",
+      "is_answerable": false
+    },
+    "diagnosis": {
+      "status": "FAIL",
+      "category": "GENERATION_FAILURE",
+      "failure_type": "Failure Type 2 (Hallucinated out-of-scope answer)",
+      "is_retrieval_success": true,
+      "is_answer_success": false,
+      "evidence": "Failed to abstain on unanswerable query."
+    }
+  },
+  {
+    "trace_id": "T18",
+    "timestamp": "2026-08-23T23:40:59.258354",
+    "category_type": "Out-of-Scope / Unanswerable Queries",
+    "question": "What is the projected stock price target for the company for next fiscal quarter?",
+    "search_mode": "hybrid",
+    "top_k": 3,
+    "retrieved_chunks": [
+      {
+        "rank": 1,
+        "filename": "expense_policy.pdf",
+        "page": 1,
+        "chunk_id": "EXPENSE_POLICY_P1_C1",
+        "score": 0.032522,
+        "text_snippet": "Company Expense & Travel Policy Section 1: Travel & Business Expenses Employees traveling on authorized company business will be reimbursed for reasonable and necessary travel expenses. Flight bookings must be made in Economy class for trips under 6 "
+      },
+      {
+        "rank": 2,
+        "filename": "remote_work_policy.pdf",
+        "page": 2,
+        "chunk_id": "REMOTE_WORK_POLICY_P2_C1",
+        "score": 0.031498,
+        "text_snippet": "Section 3: Home Office Equipment Stipend The company provides a one-time home office setup stipend of $500 upon approval of a remote work arrangement. This stipend covers monitors, ergonomic chairs, keyboards, and mice. Section 4: Information Securit"
+      },
+      {
+        "rank": 3,
+        "filename": "SS_Employee_Handbook.pdf",
+        "page": 5,
+        "chunk_id": "SS_EMPLOYEE_HANDBOOK_P5_C1",
+        "score": 0.016393,
+        "text_snippet": "5 Dear Employee, We are delighted to have you as a member of Soft Suave Technologies Private Limited. We firmly believe that all our employees are the champions of our growth. It is your intelligence and commitment that will determine the success of "
+      }
+    ],
+    "generated_answer": "I couldn't find that information in the provided company documents.",
+    "sources": "N/A",
+    "ground_truth": {
+      "expected_document": "N/A",
+      "expected_keyword": "abstain",
+      "is_answerable": false
+    },
+    "diagnosis": {
+      "status": "FAIL",
+      "category": "GENERATION_FAILURE",
+      "failure_type": "Failure Type 2 (Hallucinated out-of-scope answer)",
+      "is_retrieval_success": true,
+      "is_answer_success": false,
+      "evidence": "Failed to abstain on unanswerable query."
+    }
+  },
+  {
+    "trace_id": "T19",
+    "timestamp": "2026-08-23T23:41:01.111451",
+    "category_type": "Out-of-Scope / Unanswerable Queries",
+    "question": "What are the secret recipe ingredients used in the office cafeteria?",
+    "search_mode": "hybrid",
+    "top_k": 3,
+    "retrieved_chunks": [
+      {
+        "rank": 1,
+        "filename": "remote_work_policy.pdf",
+        "page": 2,
+        "chunk_id": "REMOTE_WORK_POLICY_P2_C1",
+        "score": 0.032002,
+        "text_snippet": "Section 3: Home Office Equipment Stipend The company provides a one-time home office setup stipend of $500 upon approval of a remote work arrangement. This stipend covers monitors, ergonomic chairs, keyboards, and mice. Section 4: Information Securit"
+      },
+      {
+        "rank": 2,
+        "filename": "SS_Employee_Handbook.pdf",
+        "page": 29,
+        "chunk_id": "SS_EMPLOYEE_HANDBOOK_P29_C1",
+        "score": 0.030777,
+        "text_snippet": "29 f. Sharing confidential material, trade secrets, or proprietary information g. Hacking into unauthorized websites h. Sending or posting information that is defamatory to the Company, its products/services, colleagues and/or customers i. Introducin"
+      },
+      {
+        "rank": 3,
+        "filename": "SS_Employee_Handbook.pdf",
+        "page": 2,
+        "chunk_id": "SS_EMPLOYEE_HANDBOOK_P2_C1",
+        "score": 0.016393,
+        "text_snippet": "2 TABLE OF CONTENTS TABLE OF CONTENTS 2 ADDRESS FROM THE MANAGEMENT\u2019S DESK 5 1. INTRODUCTION 6 1.1. ABOUT SOFT SUAVE 6 1.2. OUR VALUES 6 1.3. OUR MISSION 6 1.4. OUR VISION 6 1.5. PURPOSE OF THE HANDBOOK 7 1.6. SCOPE OF THE HANDBOOK 7 1.7. APPLICABILI"
+      }
+    ],
+    "generated_answer": "I couldn't find that information in the provided company documents.",
+    "sources": "N/A",
+    "ground_truth": {
+      "expected_document": "N/A",
+      "expected_keyword": "abstain",
+      "is_answerable": false
+    },
+    "diagnosis": {
+      "status": "FAIL",
+      "category": "GENERATION_FAILURE",
+      "failure_type": "Failure Type 2 (Hallucinated out-of-scope answer)",
+      "is_retrieval_success": true,
+      "is_answer_success": false,
+      "evidence": "Failed to abstain on unanswerable query."
+    }
+  },
+  {
+    "trace_id": "T20",
+    "timestamp": "2026-08-23T23:41:02.332413",
+    "category_type": "Out-of-Scope / Unanswerable Queries",
+    "question": "Which internal employees are scheduled for corporate promotions next quarter?",
+    "search_mode": "hybrid",
+    "top_k": 3,
+    "retrieved_chunks": [
+      {
+        "rank": 1,
+        "filename": "SS_Employee_Handbook.pdf",
+        "page": 25,
+        "chunk_id": "SS_EMPLOYEE_HANDBOOK_P25_C2",
+        "score": 0.016393,
+        "text_snippet": "ONSITE EMPLOYEES \u2013 ATTENDANCE & LEAVE PROCEDURE a. In case of On-Site employees (reporting directly to the client), should inform the respective reporting Authority at least 1 hour before commencement of duty, so that necessary arrangements are made "
+      },
+      {
+        "rank": 2,
+        "filename": "SS_Employee_Handbook.pdf",
+        "page": 17,
+        "chunk_id": "SS_EMPLOYEE_HANDBOOK_P17_C1",
+        "score": 0.016393,
+        "text_snippet": "17 7. ATTENDANCE AND PUNCTUALITY POLICY ESSENTIALS 7.1. ABSENCE INR, only 500 INR will be the employee contribution. The details can be taken from Accounts Team. OBJECTIVE The purpose of this policy is to set forth Soft Suave's practices and procedur"
+      },
+      {
+        "rank": 3,
+        "filename": "SS_Employee_Handbook.pdf",
+        "page": 39,
+        "chunk_id": "SS_EMPLOYEE_HANDBOOK_P39_C3",
+        "score": 0.016129,
+        "text_snippet": "Department \u2013 teamaccounts@softsuave.com We are committed to continuously reviewing and updating our policies and procedures as a part of periodic assessment. Therefore, the Employee Handbook will be periodically revised and is subject to modification"
+      }
+    ],
+    "generated_answer": "I couldn't find that information in the provided company documents.",
+    "sources": "N/A",
+    "ground_truth": {
+      "expected_document": "N/A",
+      "expected_keyword": "abstain",
+      "is_answerable": false
+    },
+    "diagnosis": {
+      "status": "FAIL",
+      "category": "GENERATION_FAILURE",
+      "failure_type": "Failure Type 2 (Hallucinated out-of-scope answer)",
+      "is_retrieval_success": true,
+      "is_answer_success": false,
+      "evidence": "Failed to abstain on unanswerable query."
+    }
+  }
+]

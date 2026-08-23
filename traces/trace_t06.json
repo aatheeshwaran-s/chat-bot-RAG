@@ -1,0 +1,48 @@
+{
+  "trace_id": "T06",
+  "timestamp": "2026-08-23T23:40:43.680013",
+  "category_type": "Specific Section & Process Window Rules",
+  "question": "What is specified in Section 3 of refund_policy.pdf regarding processing timeline?",
+  "search_mode": "hybrid",
+  "top_k": 3,
+  "retrieved_chunks": [
+    {
+      "rank": 1,
+      "filename": "refund_policy.pdf",
+      "page": 2,
+      "chunk_id": "REFUND_POLICY_P2_C1",
+      "score": 0.048916,
+      "text_snippet": "Section 3: Processing Refunds Approved refunds will be processed back to the original payment method within 5 to 7 business days. Shipping costs are non-refundable unless the return is due to a verifiable company defect or error. Section 4: Exchanges"
+    },
+    {
+      "rank": 2,
+      "filename": "refund_policy.pdf",
+      "page": 1,
+      "chunk_id": "REFUND_POLICY_P1_C1",
+      "score": 0.031498,
+      "text_snippet": "Customer Refund Policy Section 1: Product Refund Standard Window Customers can request a full refund within 30 days of the original purchase date. To be eligible for a refund, the product must be unused, in its original packaging, and accompanied by "
+    },
+    {
+      "rank": 3,
+      "filename": "SS_Employee_Handbook.pdf",
+      "page": 5,
+      "chunk_id": "SS_EMPLOYEE_HANDBOOK_P5_C1",
+      "score": 0.016129,
+      "text_snippet": "5 Dear Employee, We are delighted to have you as a member of Soft Suave Technologies Private Limited. We firmly believe that all our employees are the champions of our growth. It is your intelligence and commitment that will determine the success of "
+    }
+  ],
+  "generated_answer": "Section 3 of refund_policy.pdf states that approved refunds will be processed back to the original payment method within 5 to 7 business days.",
+  "sources": "- refund_policy.pdf -- Page 2 (Chunk: REFUND_POLICY_P2_C1)\n- refund_policy.pdf -- Page 1 (Chunk: REFUND_POLICY_P1_C1)\n- SS_Employee_Handbook.pdf -- Page 5 (Chunk: SS_EMPLOYEE_HANDBOOK_P5_C1)",
+  "ground_truth": {
+    "expected_document": "refund_policy.pdf",
+    "expected_keyword": "5 to 7 business days",
+    "is_answerable": true
+  },
+  "diagnosis": {
+    "status": "PASS",
+    "category": "SUCCESS",
+    "is_retrieval_success": true,
+    "is_answer_success": true,
+    "evidence": "Correct document 'refund_policy.pdf' retrieved in top-3 and answer contained '5 to 7 business days'."
+  }
+}

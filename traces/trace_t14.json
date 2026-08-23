@@ -1,0 +1,48 @@
+{
+  "trace_id": "T14",
+  "timestamp": "2026-08-23T23:40:54.549002",
+  "category_type": "Cross-Document & Edge Case Queries",
+  "question": "How long is the initial probationary period before an employee can apply for remote work eligibility?",
+  "search_mode": "hybrid",
+  "top_k": 3,
+  "retrieved_chunks": [
+    {
+      "rank": 1,
+      "filename": "remote_work_policy.pdf",
+      "page": 1,
+      "chunk_id": "REMOTE_WORK_POLICY_P1_C1",
+      "score": 0.048916,
+      "text_snippet": "Remote Work Policy Section 1: Remote Work Eligibility Full-time employees who have completed their initial 90-day probationary period are eligible to apply for remote work. Hybrid schedules allow up to 3 work-from-home days per week with manager appr"
+    },
+    {
+      "rank": 2,
+      "filename": "SS_Employee_Handbook.pdf",
+      "page": 17,
+      "chunk_id": "SS_EMPLOYEE_HANDBOOK_P17_C1",
+      "score": 0.03101,
+      "text_snippet": "17 7. ATTENDANCE AND PUNCTUALITY POLICY ESSENTIALS 7.1. ABSENCE INR, only 500 INR will be the employee contribution. The details can be taken from Accounts Team. OBJECTIVE The purpose of this policy is to set forth Soft Suave's practices and procedur"
+    },
+    {
+      "rank": 3,
+      "filename": "SS_Employee_Handbook.pdf",
+      "page": 23,
+      "chunk_id": "SS_EMPLOYEE_HANDBOOK_P23_C1",
+      "score": 0.016129,
+      "text_snippet": "23 9.5. SANDWICH RULE 9.6. LESS HOURS REQUEST PROCEDURE in the ERP, without obtaining the prior approval of the TL/Manager shall be subject to disciplinary action. e. In the ERP software, Absent(A) shall be indicated in case an employee takes a leave"
+    }
+  ],
+  "generated_answer": "Full-time employees must complete an initial 90-day probationary period before they are eligible to apply for remote work.",
+  "sources": "- remote_work_policy.pdf -- Page 1 (Chunk: REMOTE_WORK_POLICY_P1_C1)\n- SS_Employee_Handbook.pdf -- Page 17 (Chunk: SS_EMPLOYEE_HANDBOOK_P17_C1)\n- SS_Employee_Handbook.pdf -- Page 23 (Chunk: SS_EMPLOYEE_HANDBOOK_P23_C1)",
+  "ground_truth": {
+    "expected_document": "remote_work_policy.pdf",
+    "expected_keyword": "90-day",
+    "is_answerable": true
+  },
+  "diagnosis": {
+    "status": "PASS",
+    "category": "SUCCESS",
+    "is_retrieval_success": true,
+    "is_answer_success": true,
+    "evidence": "Correct document 'remote_work_policy.pdf' retrieved in top-3 and answer contained '90-day'."
+  }
+}

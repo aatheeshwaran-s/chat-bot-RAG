@@ -1,0 +1,49 @@
+{
+  "trace_id": "T08",
+  "timestamp": "2026-08-23T23:40:46.055166",
+  "category_type": "Specific Section & Process Window Rules",
+  "question": "How far in advance must leave requests exceeding 3 consecutive days be submitted?",
+  "search_mode": "hybrid",
+  "top_k": 3,
+  "retrieved_chunks": [
+    {
+      "rank": 1,
+      "filename": "leave_policy.pdf",
+      "page": 2,
+      "chunk_id": "LEAVE_POLICY_P2_C1",
+      "score": 0.048131,
+      "text_snippet": "Section 3: Carry Forward Policy Unused annual leave may be carried forward up to a maximum of 5 days into the following calendar year. Carried-forward leave must be used before March 31st of the new year, or it will be forfeited. Section 4: Sick Leav"
+    },
+    {
+      "rank": 2,
+      "filename": "expense_policy.pdf",
+      "page": 2,
+      "chunk_id": "EXPENSE_POLICY_P2_C1",
+      "score": 0.030536,
+      "text_snippet": "Section 3: Expense Report Submission Expense reports must be submitted within 14 days of returning from business travel or incurring the expense. Late submissions past 30 days will not be reimbursed without Vice President approval. Section 4: Taxi & "
+    },
+    {
+      "rank": 3,
+      "filename": "SS_Employee_Handbook.pdf",
+      "page": 18,
+      "chunk_id": "SS_EMPLOYEE_HANDBOOK_P18_C1",
+      "score": 0.016393,
+      "text_snippet": "18 8. SEPARATION POLICY 8.1. RESIGNATION 7.2. EXCESSIVE ABSENTEEISM 7.3. TARDINESS AND EARLY DEPARTURES 7.4. JOB ABANDONMENT days whether with or without leave, shall be deemed to have resigned from the service. a. Excessive Absenteeism is defined as"
+    }
+  ],
+  "generated_answer": "I couldn't find that information in the provided company documents.",
+  "sources": "N/A",
+  "ground_truth": {
+    "expected_document": "leave_policy.pdf",
+    "expected_keyword": "5 business days",
+    "is_answerable": true
+  },
+  "diagnosis": {
+    "status": "FAIL",
+    "category": "GENERATION_FAILURE",
+    "failure_type": "Failure Type 2 (Right document fetched, wrong answer)",
+    "is_retrieval_success": true,
+    "is_answer_success": false,
+    "evidence": "Right document 'leave_policy.pdf' was fetched at rank #1, but answer missed keyword '5 business days'."
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "trace_id": "T16",
+  "timestamp": "2026-08-23T23:40:56.904421",
+  "category_type": "Cross-Document & Edge Case Queries",
+  "question": "How many weeks of fully paid parental leave are provided for primary caregivers?",
+  "search_mode": "hybrid",
+  "top_k": 3,
+  "retrieved_chunks": [
+    {
+      "rank": 1,
+      "filename": "leave_policy.pdf",
+      "page": 2,
+      "chunk_id": "LEAVE_POLICY_P2_C1",
+      "score": 0.048916,
+      "text_snippet": "Section 3: Carry Forward Policy Unused annual leave may be carried forward up to a maximum of 5 days into the following calendar year. Carried-forward leave must be used before March 31st of the new year, or it will be forfeited. Section 4: Sick Leav"
+    },
+    {
+      "rank": 2,
+      "filename": "SS_Employee_Handbook.pdf",
+      "page": 24,
+      "chunk_id": "SS_EMPLOYEE_HANDBOOK_P24_C1",
+      "score": 0.031754,
+      "text_snippet": "24 9.7. LEAVE WITHOUT PAY (LWP) 9.8. MATERNITY LEAVE b. All employees with less hours of work shall address the LH by submitting the Less Hours attendance request in the ERP along with valid evidence to support the minimum working hours and getting i"
+    },
+    {
+      "rank": 3,
+      "filename": "leave_policy.pdf",
+      "page": 1,
+      "chunk_id": "LEAVE_POLICY_P1_C1",
+      "score": 0.031025,
+      "text_snippet": "Company Leave Policy (2025) Section 1: Annual Leave Entitlement Employees receive 20 days of paid annual leave per calendar year. Annual leave accrues at a rate of 1.66 days per month worked. Full-time employees are eligible for annual leave immediat"
+    }
+  ],
+  "generated_answer": "Parental leave provides 12 weeks of fully paid leave for primary caregivers.",
+  "sources": "- leave_policy.pdf -- Page 2 (Chunk: LEAVE_POLICY_P2_C1)\n- SS_Employee_Handbook.pdf -- Page 24 (Chunk: SS_EMPLOYEE_HANDBOOK_P24_C1)\n- leave_policy.pdf -- Page 1 (Chunk: LEAVE_POLICY_P1_C1)",
+  "ground_truth": {
+    "expected_document": "leave_policy.pdf",
+    "expected_keyword": "12 weeks",
+    "is_answerable": true
+  },
+  "diagnosis": {
+    "status": "PASS",
+    "category": "SUCCESS",
+    "is_retrieval_success": true,
+    "is_answer_success": true,
+    "evidence": "Correct document 'leave_policy.pdf' retrieved in top-3 and answer contained '12 weeks'."
+  }
+}
