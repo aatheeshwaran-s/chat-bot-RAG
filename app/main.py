@@ -22,6 +22,7 @@ from app.inspection import print_inspection_view
 from app.hybrid import HybridSearchEngine, BM25SearchEngine
 from app.trace_collector import collect_all_traces
 from app.error_analysis import analyze_all_traces, print_error_analysis_summary
+from app.w6_eval import evaluate_w6
 
 
 def run_ingestion(chunk_size: int = 500, chunk_overlap: int = 50):
@@ -188,6 +189,9 @@ def main():
 
     subparsers.add_parser("analyze_errors", help="Run open coding & Frequency x Severity error analysis")
 
+    # Week 6 Module 3 Ticket Judge Validation & Eval commands
+    subparsers.add_parser("evaluate_w6", help="Run Week 6 Ticket Reply Judge Validation & Eval Suite")
+
     args = parser.parse_args()
 
     if args.command == "ingest":
@@ -205,6 +209,8 @@ def main():
     elif args.command == "analyze_errors":
         rep = analyze_all_traces()
         print_error_analysis_summary(rep)
+    elif args.command == "evaluate_w6":
+        evaluate_w6()
     else:
         parser.print_help()
 
