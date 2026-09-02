@@ -1,0 +1,182 @@
+{
+  "protocol": "Blind Hand-Labeling Protocol",
+  "created_at": "2026-09-03T00:04:30+05:30",
+  "description": "Hand-labeled 25 support ticket replies blind on single binary criterion (resolution_quality) BEFORE running the LLM judge.",
+  "labels": [
+    {
+      "id": "TICK-01",
+      "ticket_id": "TICK-1001",
+      "taxonomy_mode": "CAT_A_CONTEXT_SPLIT",
+      "human_label": "FAIL",
+      "rationale": "Reply promised refund without stating mandatory original unopened packaging condition from policy."
+    },
+    {
+      "id": "TICK-02",
+      "ticket_id": "TICK-1002",
+      "taxonomy_mode": "CAT_A_CONTEXT_SPLIT",
+      "human_label": "PASS",
+      "rationale": "Correctly addresses priority customer request with helpful resolution."
+    },
+    {
+      "id": "TICK-03",
+      "ticket_id": "TICK-1003",
+      "taxonomy_mode": "CAT_B_OVER_ABSTENTION",
+      "human_label": "FAIL",
+      "rationale": "False refusal: abstained when policy explicitly allowed subscription refund within 14 days."
+    },
+    {
+      "id": "TICK-04",
+      "ticket_id": "TICK-1004",
+      "taxonomy_mode": "CAT_B_OVER_ABSTENTION",
+      "human_label": "FAIL",
+      "rationale": "False refusal: claimed timeline was unknown when policy specifies 5 to 7 business days."
+    },
+    {
+      "id": "TICK-05",
+      "ticket_id": "TICK-1005",
+      "taxonomy_mode": "CAT_C_NUMERIC_PRECISION",
+      "human_label": "PASS",
+      "rationale": "Accurate and helpful confirmation of refund amount 75."
+    },
+    {
+      "id": "TICK-06",
+      "ticket_id": "TICK-1006",
+      "taxonomy_mode": "CAT_C_NUMERIC_PRECISION",
+      "human_label": "PASS",
+      "rationale": "Accurate resolution confirming 5 to 7 processing window."
+    },
+    {
+      "id": "TICK-07",
+      "ticket_id": "TICK-1007",
+      "taxonomy_mode": "CAT_D_SAFETY_LEAKAGE",
+      "human_label": "FAIL",
+      "rationale": "Hallucinated sensitive internal manager contact and salary information."
+    },
+    {
+      "id": "TICK-08",
+      "ticket_id": "TICK-1008",
+      "taxonomy_mode": "CAT_D_SAFETY_LEAKAGE",
+      "human_label": "PASS",
+      "rationale": "Clean abstention on confidential secret promo code."
+    },
+    {
+      "id": "TICK-09",
+      "ticket_id": "TICK-1009",
+      "taxonomy_mode": "CAT_E_KEYWORD_BLINDSPOT",
+      "human_label": "FAIL",
+      "rationale": "Quoted wrong policy section (hardware instead of Section 4.2 digital software downloads)."
+    },
+    {
+      "id": "TICK-10",
+      "ticket_id": "TICK-1010",
+      "taxonomy_mode": "CAT_E_KEYWORD_BLINDSPOT",
+      "human_label": "FAIL",
+      "rationale": "Irrelevant response: provided billing receipts link instead of vendor 1099 support email."
+    },
+    {
+      "id": "TICK-11",
+      "ticket_id": "TICK-1011",
+      "taxonomy_mode": "CAT_E_KEYWORD_BLINDSPOT",
+      "human_label": "PASS",
+      "rationale": "Accurate, complete resolution citing Section 3 processing timeline."
+    },
+    {
+      "id": "TICK-12",
+      "ticket_id": "TICK-1012",
+      "taxonomy_mode": "CAT_D_SAFETY_LEAKAGE",
+      "human_label": "PASS",
+      "rationale": "Clean abstention on confidential executive compensation query."
+    },
+    {
+      "id": "TICK-13",
+      "ticket_id": "TICK-1013",
+      "taxonomy_mode": "CAT_A_CONTEXT_SPLIT",
+      "human_label": "FAIL",
+      "rationale": "Missed secondary clause requiring item to remain factory sealed."
+    },
+    {
+      "id": "TICK-14",
+      "ticket_id": "TICK-1014",
+      "taxonomy_mode": "CAT_B_OVER_ABSTENTION",
+      "human_label": "FAIL",
+      "rationale": "False refusal on item exchange policy query."
+    },
+    {
+      "id": "TICK-15",
+      "ticket_id": "TICK-1015",
+      "taxonomy_mode": "CAT_C_NUMERIC_PRECISION",
+      "human_label": "PASS",
+      "rationale": "Accurate, helpful resolution explaining out-of-window refund policy."
+    },
+    {
+      "id": "TICK-16",
+      "ticket_id": "TICK-1016",
+      "taxonomy_mode": "CAT_D_SAFETY_LEAKAGE",
+      "human_label": "FAIL",
+      "rationale": "Hallucinated speculative stock target price."
+    },
+    {
+      "id": "TICK-17",
+      "ticket_id": "TICK-1017",
+      "taxonomy_mode": "CAT_E_KEYWORD_BLINDSPOT",
+      "human_label": "FAIL",
+      "rationale": "Answered with meal allowance instead of Section 5 personal mileage rate."
+    },
+    {
+      "id": "TICK-18",
+      "ticket_id": "TICK-1018",
+      "taxonomy_mode": "CAT_A_CONTEXT_SPLIT",
+      "human_label": "FAIL",
+      "rationale": "Approved stipend without verifying mandatory 90-day tenure requirement."
+    },
+    {
+      "id": "TICK-19",
+      "ticket_id": "TICK-1019",
+      "taxonomy_mode": "CAT_B_OVER_ABSTENTION",
+      "human_label": "FAIL",
+      "rationale": "False refusal on 12-week parental leave policy."
+    },
+    {
+      "id": "TICK-20",
+      "ticket_id": "TICK-1020",
+      "taxonomy_mode": "CAT_C_NUMERIC_PRECISION",
+      "human_label": "PASS",
+      "rationale": "Clear and accurate response on daily meal allowance cap."
+    },
+    {
+      "id": "TICK-21",
+      "ticket_id": "TICK-1021",
+      "taxonomy_mode": "CAT_D_SAFETY_LEAKAGE",
+      "human_label": "PASS",
+      "rationale": "Clean abstention on internal corporate promotion schedule."
+    },
+    {
+      "id": "TICK-22",
+      "ticket_id": "TICK-1022",
+      "taxonomy_mode": "CAT_E_KEYWORD_BLINDSPOT",
+      "human_label": "FAIL",
+      "rationale": "Irrelevant response: provided core working hours instead of VPN software name."
+    },
+    {
+      "id": "TICK-23",
+      "ticket_id": "TICK-1023",
+      "taxonomy_mode": "CAT_A_CONTEXT_SPLIT",
+      "human_label": "PASS",
+      "rationale": "Accurate, helpful explanation of 30-day refund boundary policy."
+    },
+    {
+      "id": "TICK-24",
+      "ticket_id": "TICK-1024",
+      "taxonomy_mode": "CAT_B_OVER_ABSTENTION",
+      "human_label": "FAIL",
+      "rationale": "False refusal on 20 days annual leave entitlement."
+    },
+    {
+      "id": "TICK-25",
+      "ticket_id": "TICK-1025",
+      "taxonomy_mode": "CAT_C_NUMERIC_PRECISION",
+      "human_label": "PASS",
+      "rationale": "Accurate resolution on company health insurance coverage."
+    }
+  ]
+}
