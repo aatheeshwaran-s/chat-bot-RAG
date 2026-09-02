@@ -1,0 +1,1 @@
+Iterating prompt with few-shot examples for TICK-05 (ignoring missing dollar sign formatting in resolution scoring) and TICK-18 (penalizing missing tenure eligibility clauses) will correct the judge's over-penalization of formatting and under-penalization of incomplete policy checks, increasing human-judge agreement from 76.0% to 84.0%+.
