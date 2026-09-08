@@ -1,13 +1,14 @@
 """
-Main CLI Application Controller for the RAG Chatbot Backend.
+Main CLI Application Controller for the RAG Chatbot & Build Week Agent Engine.
 
-Provides beginner-friendly commands:
+Provides CLI commands:
 1. python -m app.main ingest       : Extract text from PDFs, generate embeddings, and index into local Qdrant.
 2. python -m app.main query "..."    : Ask a question to the chatbot with optional metadata filters.
-3. python -m app.main chat         : Start an interactive terminal chat session.
-4. python -m app.main evaluate     : Run Week 4 Failure Separation & hit-rate@3 benchmark.
-5. python -m app.main inspect      : Side-by-side inspection view (Question, Retrieved Chunks, Answer, Diagnosis).
-6. python -m app.main experiment_w4: Single-change hit-rate@3 experiment (Vector vs Hybrid BM25+RRF).
+3. python -m app.main agent "..."    : Run Hand-Built ReAct Agent with step-by-step visible execution trace.
+4. python -m app.main workflow "..." : Run Plain Fixed Workflow pipeline.
+5. python -m app.main race           : Run Agent vs. Plain Fixed Workflow comparison benchmark (Speed, Cost, Reliability).
+6. python -m app.main chat         : Start interactive terminal chat session.
+7. python -m app.main evaluate     : Run evaluation benchmark.
 """
 
 import sys
@@ -19,13 +20,13 @@ from app.retrieval import QdrantVectorStore
 from app.generation import LLMGenerator
 from app.evaluate import evaluate_rag_system, run_week4_experiment
 from app.inspection import print_inspection_view
-from app.hybrid import HybridSearchEngine, BM25SearchEngine
+from app.hybrid import HybridSearchEngine
+from app.agent import HandBuiltReActAgent
+from app.workflow import PlainFixedWorkflow
+from app.race import run_agent_vs_workflow_race
 
 
 def run_ingestion(chunk_size: int = 500, chunk_overlap: int = 50):
-    """
-    Full document ingestion pipeline: PDFs -> Text -> Chunks -> Embeddings -> Qdrant
-    """
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     docs_folder = os.path.join(base_dir, "documents")
 
@@ -48,9 +49,6 @@ def run_ingestion(chunk_size: int = 500, chunk_overlap: int = 50):
 
 
 def answer_user_query(question: str, department: str = None, top_k: int = 5, filename: str = None, mode: str = "vector"):
-    """
-    Single question answer workflow with optional metadata filtering.
-    """
     engine = EmbeddingEngine()
     store = QdrantVectorStore()
     generator = LLMGenerator()
@@ -87,9 +85,6 @@ def answer_user_query(question: str, department: str = None, top_k: int = 5, fil
 
 
 def inspect_question(question: str, expected_doc: str = None, expected_kw: str = None, mode: str = "hybrid"):
-    """
-    Renders Week 4 visual inspection view for any target question.
-    """
     engine = EmbeddingEngine()
     store = QdrantVectorStore()
     generator = LLMGenerator()
@@ -117,17 +112,12 @@ def inspect_question(question: str, expected_doc: str = None, expected_kw: str =
 
 
 def start_interactive_chat():
-    """
-    Interactive CLI Chat loop.
-    """
     print("\n=======================================================")
-    print(" Welcome to the Company Document RAG Chatbot (CLI)")
+    print(" Welcome to the Support Agent & RAG System (CLI)")
     print(" Type 'exit' or 'quit' to stop.")
     print("=======================================================\n")
 
-    engine = EmbeddingEngine()
-    store = QdrantVectorStore()
-    generator = LLMGenerator()
+    agent = HandBuiltReActAgent()
 
     while True:
         try:
@@ -138,19 +128,15 @@ def start_interactive_chat():
                 print("Goodbye!")
                 break
 
-            q_vector = engine.embed_text(user_input)
-            retrieved = store.similarity_search(q_vector, top_k=5)
-            result = generator.generate_answer(user_input, retrieved)
-
-            print(f"\nAssistant:\n{result['answer']}\n")
-            print(f"Source:\n{result['sources']}\n")
+            result = agent.run(user_input, verbose=True)
+            print(f"\n[SUMMARY] Steps: {result['steps_taken']} | Time: {result['total_latency']}s | Tokens: {result['total_tokens']} | Cost: ${result['estimated_cost_usd']}")
         except KeyboardInterrupt:
             print("\nSession ended.")
             break
 
 
 def main():
-    parser = argparse.ArgumentParser(description="RAG Chatbot Backend CLI")
+    parser = argparse.ArgumentParser(description="Build Week Agent & RAG Backend CLI")
     subparsers = parser.add_subparsers(dest="command", help="Available commands")
 
     # Ingest command
@@ -161,19 +147,28 @@ def main():
     # Query command
     parser_query = subparsers.add_parser("query", help="Ask a question")
     parser_query.add_argument("question", type=str, help="User question string")
-    parser_query.add_argument("--department", type=str, default=None, help="Filter by department (e.g. HR, Operations)")
-    parser_query.add_argument("--filename", type=str, default=None, help="Filter results by filename (e.g. SS_Employee_Handbook.pdf)")
+    parser_query.add_argument("--department", type=str, default=None, help="Filter by department")
+    parser_query.add_argument("--filename", type=str, default=None, help="Filter results by filename")
     parser_query.add_argument("--mode", type=str, default="hybrid", choices=["vector", "hybrid"], help="Search mode")
 
-    # Inspect command (Week 4 Inspection View)
+    # Agent command
+    parser_agent = subparsers.add_parser("agent", help="Run Hand-Built ReAct Agent on support ticket or question")
+    parser_agent.add_argument("question", type=str, nargs="?", default="Customer Alice requested a refund for order TICK-101 purchased 12 days ago ($120). Check policy and process.", help="Ticket or question text")
+    parser_agent.add_argument("--max-steps", type=int, default=5, help="Maximum step budget")
+
+    # Workflow command
+    parser_wf = subparsers.add_parser("workflow", help="Run Plain Fixed Workflow on support ticket or question")
+    parser_wf.add_argument("question", type=str, nargs="?", default="Customer Alice requested a refund for order TICK-101 purchased 12 days ago ($120). Check policy and process.", help="Ticket or question text")
+
+    # Race command
+    subparsers.add_parser("race", help="Run Agent vs Plain Fixed Workflow Race Benchmark (Speed, Cost, Reliability)")
+
+    # Inspect command
     parser_inspect = subparsers.add_parser("inspect", help="Side-by-side inspection view for retrieval & answer")
     parser_inspect.add_argument("question", type=str, nargs="?", default="What is the daily meal allowance cap for business travel expenses?", help="Question to inspect")
-    parser_inspect.add_argument("--expected-doc", type=str, default="expense_policy.pdf", help="Expected document filename")
-    parser_inspect.add_argument("--expected-kw", type=str, default="$75", help="Expected ground-truth keyword")
-    parser_inspect.add_argument("--mode", type=str, default="hybrid", choices=["vector", "hybrid"], help="Search mode")
 
     # Interactive chat command
-    subparsers.add_parser("chat", help="Start interactive CLI chat")
+    subparsers.add_parser("chat", help="Start interactive CLI agent chat")
 
     # Evaluate command
     subparsers.add_parser("evaluate", help="Run benchmark evaluation suite")
@@ -185,8 +180,18 @@ def main():
         run_ingestion(chunk_size=args.chunk_size, chunk_overlap=args.overlap)
     elif args.command == "query":
         answer_user_query(args.question, department=args.department, filename=args.filename, mode=args.mode)
+    elif args.command == "agent":
+        agent = HandBuiltReActAgent(max_steps=args.max_steps)
+        res = agent.run(args.question, verbose=True)
+        print(f"\nExecution Summary: Steps={res['steps_taken']}, Time={res['total_latency']}s, Tokens={res['total_tokens']}, Est Cost=${res['estimated_cost_usd']}")
+    elif args.command == "workflow":
+        wf = PlainFixedWorkflow()
+        res = wf.run(args.question, verbose=True)
+        print(f"\nExecution Summary: Steps={res['steps_taken']}, Time={res['total_latency']}s, Tokens={res['total_tokens']}, Est Cost=${res['estimated_cost_usd']}")
+    elif args.command == "race":
+        run_agent_vs_workflow_race(verbose=True)
     elif args.command == "inspect":
-        inspect_question(args.question, expected_doc=args.expected_doc, expected_kw=args.expected_kw, mode=args.mode)
+        inspect_question(args.question)
     elif args.command == "chat":
         start_interactive_chat()
     elif args.command in ("evaluate", "experiment_w4"):

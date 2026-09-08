@@ -1,0 +1,94 @@
+{
+  "tickets": [
+    {
+      "ticket_id": "TICK-101",
+      "category": "customer_refund",
+      "ticket_text": "Customer Alice (Order #ORD-501) requested a full refund for an unused standard product purchased 12 days ago ($120). Can we approve this refund?",
+      "is_multistep": true,
+      "expected_action": "approve",
+      "expected_keyword": "30 days",
+      "expected_doc": "refund_policy.pdf"
+    },
+    {
+      "ticket_id": "TICK-102",
+      "category": "customer_refund",
+      "ticket_text": "Customer Bob (Order #ORD-502) requested a refund for a customized software license purchased 10 days ago ($250). Check policy and decide refund status.",
+      "is_multistep": true,
+      "expected_action": "deny",
+      "expected_keyword": "non-refundable",
+      "expected_doc": "refund_policy.pdf"
+    },
+    {
+      "ticket_id": "TICK-103",
+      "category": "employee_expense",
+      "ticket_text": "Employee Charlie (Ticket EXP-201) submitted an expense report for a 2-day business travel trip: Day 1 meals $85, Day 2 meals $60. Daily allowance cap is $75. Calculate reimbursable meal total.",
+      "is_multistep": true,
+      "expected_action": "approve",
+      "expected_keyword": "$135",
+      "expected_doc": "expense_policy.pdf"
+    },
+    {
+      "ticket_id": "TICK-104",
+      "category": "employee_expense",
+      "ticket_text": "Employee David (Ticket EXP-202) submitted a travel expense report 45 days after returning from a trip. Calculate reimbursable status under expense policy.",
+      "is_multistep": true,
+      "expected_action": "escalate",
+      "expected_keyword": "Vice President approval",
+      "expected_doc": "expense_policy.pdf"
+    },
+    {
+      "ticket_id": "TICK-105",
+      "category": "leave_request",
+      "ticket_text": "Employee Eve asks: How many unused annual leave days can I carry forward into next calendar year, and by what deadline must they be used?",
+      "is_multistep": false,
+      "expected_action": "approve",
+      "expected_keyword": "5 days",
+      "expected_doc": "leave_policy.pdf"
+    },
+    {
+      "ticket_id": "TICK-106",
+      "category": "leave_request",
+      "ticket_text": "Employee Frank requested 4 consecutive days of sick leave. Is a medical certificate required under company policy?",
+      "is_multistep": false,
+      "expected_action": "approve",
+      "expected_keyword": "exceeding 2 consecutive days",
+      "expected_doc": "leave_policy.pdf"
+    },
+    {
+      "ticket_id": "TICK-107",
+      "category": "remote_stipend",
+      "ticket_text": "Remote employee Grace requested reimbursement of $650 for home office setup (monitor & chair). Check stipend cap and calculate reimbursable amount.",
+      "is_multistep": true,
+      "expected_action": "approve",
+      "expected_keyword": "$500",
+      "expected_doc": "remote_work_policy.pdf"
+    },
+    {
+      "ticket_id": "TICK-108",
+      "category": "remote_stipend",
+      "ticket_text": "What core working hours must remote employees be available online according to company policy?",
+      "is_multistep": false,
+      "expected_action": "approve",
+      "expected_keyword": "10:00 AM to 4:00 PM",
+      "expected_doc": "remote_work_policy.pdf"
+    },
+    {
+      "ticket_id": "TICK-109",
+      "category": "employee_expense",
+      "ticket_text": "Employee Henry drove 120 personal miles on authorized business travel. Reimbursable rate is $0.65 per mile. Calculate exact reimbursement.",
+      "is_multistep": true,
+      "expected_action": "approve",
+      "expected_keyword": "$78",
+      "expected_doc": "expense_policy.pdf"
+    },
+    {
+      "ticket_id": "TICK-110",
+      "category": "customer_refund",
+      "ticket_text": "Customer Iris (Order #ORD-503) requested a refund 45 days after purchase ($90). Check refund window eligibility.",
+      "is_multistep": true,
+      "expected_action": "deny",
+      "expected_keyword": "30 days",
+      "expected_doc": "refund_policy.pdf"
+    }
+  ]
+}
