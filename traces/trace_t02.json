@@ -1,0 +1,48 @@
+{
+  "trace_id": "T02",
+  "timestamp": "2026-08-23T23:40:37.367948",
+  "category_type": "Direct Fact Lookup",
+  "question": "What is the daily meal allowance cap for business travel expenses?",
+  "search_mode": "hybrid",
+  "top_k": 3,
+  "retrieved_chunks": [
+    {
+      "rank": 1,
+      "filename": "expense_policy.pdf",
+      "page": 1,
+      "chunk_id": "EXPENSE_POLICY_P1_C1",
+      "score": 0.048916,
+      "text_snippet": "Company Expense & Travel Policy Section 1: Travel & Business Expenses Employees traveling on authorized company business will be reimbursed for reasonable and necessary travel expenses. Flight bookings must be made in Economy class for trips under 6 "
+    },
+    {
+      "rank": 2,
+      "filename": "expense_policy.pdf",
+      "page": 2,
+      "chunk_id": "EXPENSE_POLICY_P2_C1",
+      "score": 0.047123,
+      "text_snippet": "Section 3: Expense Report Submission Expense reports must be submitted within 14 days of returning from business travel or incurring the expense. Late submissions past 30 days will not be reimbursed without Vice President approval. Section 4: Taxi & "
+    },
+    {
+      "rank": 3,
+      "filename": "SS_Employee_Handbook.pdf",
+      "page": 26,
+      "chunk_id": "SS_EMPLOYEE_HANDBOOK_P26_C1",
+      "score": 0.016129,
+      "text_snippet": "26 10. CLIENT DEPUTATION - COMPENSATION POLICY 11. WORK FROM HOME POLICY c. For Technical Team a. If an employee works on a non working days for a minimum of 8 hours (exclusive of breaks) with appropriate approval and reasons on any new projects apar"
+    }
+  ],
+  "generated_answer": "The daily meal allowance cap for business travel is $75 per day.",
+  "sources": "- expense_policy.pdf -- Page 1 (Chunk: EXPENSE_POLICY_P1_C1)\n- expense_policy.pdf -- Page 2 (Chunk: EXPENSE_POLICY_P2_C1)\n- SS_Employee_Handbook.pdf -- Page 26 (Chunk: SS_EMPLOYEE_HANDBOOK_P26_C1)",
+  "ground_truth": {
+    "expected_document": "expense_policy.pdf",
+    "expected_keyword": "$75",
+    "is_answerable": true
+  },
+  "diagnosis": {
+    "status": "PASS",
+    "category": "SUCCESS",
+    "is_retrieval_success": true,
+    "is_answer_success": true,
+    "evidence": "Correct document 'expense_policy.pdf' retrieved in top-3 and answer contained '$75'."
+  }
+}

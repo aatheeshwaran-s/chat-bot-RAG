@@ -1,0 +1,49 @@
+{
+  "trace_id": "T15",
+  "timestamp": "2026-08-23T23:40:55.681738",
+  "category_type": "Cross-Document & Edge Case Queries",
+  "question": "What VPN tool is required for remote workers when connecting to corporate networks?",
+  "search_mode": "hybrid",
+  "top_k": 3,
+  "retrieved_chunks": [
+    {
+      "rank": 1,
+      "filename": "remote_work_policy.pdf",
+      "page": 2,
+      "chunk_id": "REMOTE_WORK_POLICY_P2_C1",
+      "score": 0.048916,
+      "text_snippet": "Section 3: Home Office Equipment Stipend The company provides a one-time home office setup stipend of $500 upon approval of a remote work arrangement. This stipend covers monitors, ergonomic chairs, keyboards, and mice. Section 4: Information Securit"
+    },
+    {
+      "rank": 2,
+      "filename": "remote_work_policy.pdf",
+      "page": 1,
+      "chunk_id": "REMOTE_WORK_POLICY_P1_C1",
+      "score": 0.047123,
+      "text_snippet": "Remote Work Policy Section 1: Remote Work Eligibility Full-time employees who have completed their initial 90-day probationary period are eligible to apply for remote work. Hybrid schedules allow up to 3 work-from-home days per week with manager appr"
+    },
+    {
+      "rank": 3,
+      "filename": "SS_Employee_Handbook.pdf",
+      "page": 27,
+      "chunk_id": "SS_EMPLOYEE_HANDBOOK_P27_C1",
+      "score": 0.030769,
+      "text_snippet": "27 Dos Employees shall Don\u2019ts Employees shall not Ensure that they possess all appropriate and necessary equipment (e.g. laptop, computer, software etc.) and other content required to be fully productive while working from home. Ensure that they are "
+    }
+  ],
+  "generated_answer": "I couldn't find that information in the provided company documents.",
+  "sources": "N/A",
+  "ground_truth": {
+    "expected_document": "remote_work_policy.pdf",
+    "expected_keyword": "VPN",
+    "is_answerable": true
+  },
+  "diagnosis": {
+    "status": "FAIL",
+    "category": "GENERATION_FAILURE",
+    "failure_type": "Failure Type 2 (Right document fetched, wrong answer)",
+    "is_retrieval_success": true,
+    "is_answer_success": false,
+    "evidence": "Right document 'remote_work_policy.pdf' was fetched at rank #1, but answer missed keyword 'VPN'."
+  }
+}

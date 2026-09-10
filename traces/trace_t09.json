@@ -1,0 +1,48 @@
+{
+  "trace_id": "T09",
+  "timestamp": "2026-08-23T23:40:47.517472",
+  "category_type": "Multi-Condition & Complex Policy Queries",
+  "question": "What core hours must remote workers maintain online, and what is the maximum WFH days per week under hybrid schedule?",
+  "search_mode": "hybrid",
+  "top_k": 3,
+  "retrieved_chunks": [
+    {
+      "rank": 1,
+      "filename": "remote_work_policy.pdf",
+      "page": 1,
+      "chunk_id": "REMOTE_WORK_POLICY_P1_C1",
+      "score": 0.048916,
+      "text_snippet": "Remote Work Policy Section 1: Remote Work Eligibility Full-time employees who have completed their initial 90-day probationary period are eligible to apply for remote work. Hybrid schedules allow up to 3 work-from-home days per week with manager appr"
+    },
+    {
+      "rank": 2,
+      "filename": "SS_Employee_Handbook.pdf",
+      "page": 26,
+      "chunk_id": "SS_EMPLOYEE_HANDBOOK_P26_C1",
+      "score": 0.045688,
+      "text_snippet": "26 10. CLIENT DEPUTATION - COMPENSATION POLICY 11. WORK FROM HOME POLICY c. For Technical Team a. If an employee works on a non working days for a minimum of 8 hours (exclusive of breaks) with appropriate approval and reasons on any new projects apar"
+    },
+    {
+      "rank": 3,
+      "filename": "SS_Employee_Handbook.pdf",
+      "page": 27,
+      "chunk_id": "SS_EMPLOYEE_HANDBOOK_P27_C1",
+      "score": 0.031498,
+      "text_snippet": "27 Dos Employees shall Don\u2019ts Employees shall not Ensure that they possess all appropriate and necessary equipment (e.g. laptop, computer, software etc.) and other content required to be fully productive while working from home. Ensure that they are "
+    }
+  ],
+  "generated_answer": "Remote workers must be available and reachable online during core business hours from 10:00 AM to 4:00 PM local time. Under a hybrid schedule, employees can work from home for up to 3 days per week with manager approval.",
+  "sources": "- remote_work_policy.pdf -- Page 1 (Chunk: REMOTE_WORK_POLICY_P1_C1)\n- SS_Employee_Handbook.pdf -- Page 26 (Chunk: SS_EMPLOYEE_HANDBOOK_P26_C1)\n- SS_Employee_Handbook.pdf -- Page 27 (Chunk: SS_EMPLOYEE_HANDBOOK_P27_C1)",
+  "ground_truth": {
+    "expected_document": "remote_work_policy.pdf",
+    "expected_keyword": "10:00 AM to 4:00 PM",
+    "is_answerable": true
+  },
+  "diagnosis": {
+    "status": "PASS",
+    "category": "SUCCESS",
+    "is_retrieval_success": true,
+    "is_answer_success": true,
+    "evidence": "Correct document 'remote_work_policy.pdf' retrieved in top-3 and answer contained '10:00 AM to 4:00 PM'."
+  }
+}

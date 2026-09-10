@@ -1,0 +1,164 @@
+{
+  "trace_questions": [
+    {
+      "id": "T01",
+      "category_type": "Direct Fact Lookup",
+      "question": "How many days of annual leave do employees receive per year?",
+      "expected_document": "leave_policy.pdf",
+      "expected_keyword": "20 days",
+      "is_answerable": true
+    },
+    {
+      "id": "T02",
+      "category_type": "Direct Fact Lookup",
+      "question": "What is the daily meal allowance cap for business travel expenses?",
+      "expected_document": "expense_policy.pdf",
+      "expected_keyword": "$75",
+      "is_answerable": true
+    },
+    {
+      "id": "T03",
+      "category_type": "Direct Fact Lookup",
+      "question": "What is the one-time home office setup stipend for remote work?",
+      "expected_document": "remote_work_policy.pdf",
+      "expected_keyword": "$500",
+      "is_answerable": true
+    },
+    {
+      "id": "T04",
+      "category_type": "Direct Fact Lookup",
+      "question": "What percentage of health insurance premium costs does the company pay for employees?",
+      "expected_document": "employee_handbook.pdf",
+      "expected_keyword": "85%",
+      "is_answerable": true
+    },
+    {
+      "id": "T05",
+      "category_type": "Specific Section & Process Window Rules",
+      "question": "Within how many days must expense reports be submitted after returning from travel?",
+      "expected_document": "expense_policy.pdf",
+      "expected_keyword": "14 days",
+      "is_answerable": true
+    },
+    {
+      "id": "T06",
+      "category_type": "Specific Section & Process Window Rules",
+      "question": "What is specified in Section 3 of refund_policy.pdf regarding processing timeline?",
+      "expected_document": "refund_policy.pdf",
+      "expected_keyword": "5 to 7 business days",
+      "is_answerable": true
+    },
+    {
+      "id": "T07",
+      "category_type": "Specific Section & Process Window Rules",
+      "question": "How many unused annual leave days can be carried forward into the following year?",
+      "expected_document": "leave_policy.pdf",
+      "expected_keyword": "5 days",
+      "is_answerable": true
+    },
+    {
+      "id": "T08",
+      "category_type": "Specific Section & Process Window Rules",
+      "question": "How far in advance must leave requests exceeding 3 consecutive days be submitted?",
+      "expected_document": "leave_policy.pdf",
+      "expected_keyword": "5 business days",
+      "is_answerable": true
+    },
+    {
+      "id": "T09",
+      "category_type": "Multi-Condition & Complex Policy Queries",
+      "question": "What core hours must remote workers maintain online, and what is the maximum WFH days per week under hybrid schedule?",
+      "expected_document": "remote_work_policy.pdf",
+      "expected_keyword": "10:00 AM to 4:00 PM",
+      "is_answerable": true
+    },
+    {
+      "id": "T10",
+      "category_type": "Multi-Condition & Complex Policy Queries",
+      "question": "What travel class is required for flights under 6 hours and what is the personal mileage reimbursement rate?",
+      "expected_document": "expense_policy.pdf",
+      "expected_keyword": "Economy class",
+      "is_answerable": true
+    },
+    {
+      "id": "T11",
+      "category_type": "Multi-Condition & Complex Policy Queries",
+      "question": "What is the annual learning stipend for professional development and what activities does it cover?",
+      "expected_document": "employee_handbook.pdf",
+      "expected_keyword": "$1,000",
+      "is_answerable": true
+    },
+    {
+      "id": "T12",
+      "category_type": "Multi-Condition & Complex Policy Queries",
+      "question": "Under what condition is a medical certificate mandatory for sick leave?",
+      "expected_document": "leave_policy.pdf",
+      "expected_keyword": "2 consecutive days",
+      "is_answerable": true
+    },
+    {
+      "id": "T13",
+      "category_type": "Cross-Document & Edge Case Queries",
+      "question": "Are digital download software licenses eligible for a refund under Section 2?",
+      "expected_document": "refund_policy.pdf",
+      "expected_keyword": "non-refundable",
+      "is_answerable": true
+    },
+    {
+      "id": "T14",
+      "category_type": "Cross-Document & Edge Case Queries",
+      "question": "How long is the initial probationary period before an employee can apply for remote work eligibility?",
+      "expected_document": "remote_work_policy.pdf",
+      "expected_keyword": "90-day",
+      "is_answerable": true
+    },
+    {
+      "id": "T15",
+      "category_type": "Cross-Document & Edge Case Queries",
+      "question": "What VPN tool is required for remote workers when connecting to corporate networks?",
+      "expected_document": "remote_work_policy.pdf",
+      "expected_keyword": "VPN",
+      "is_answerable": true
+    },
+    {
+      "id": "T16",
+      "category_type": "Cross-Document & Edge Case Queries",
+      "question": "How many weeks of fully paid parental leave are provided for primary caregivers?",
+      "expected_document": "leave_policy.pdf",
+      "expected_keyword": "12 weeks",
+      "is_answerable": true
+    },
+    {
+      "id": "T17",
+      "category_type": "Out-of-Scope / Unanswerable Queries",
+      "question": "What is the exact annual base salary and performance bonus structure of the company CEO?",
+      "expected_document": "N/A",
+      "expected_keyword": "abstain",
+      "is_answerable": false
+    },
+    {
+      "id": "T18",
+      "category_type": "Out-of-Scope / Unanswerable Queries",
+      "question": "What is the projected stock price target for the company for next fiscal quarter?",
+      "expected_document": "N/A",
+      "expected_keyword": "abstain",
+      "is_answerable": false
+    },
+    {
+      "id": "T19",
+      "category_type": "Out-of-Scope / Unanswerable Queries",
+      "question": "What are the secret recipe ingredients used in the office cafeteria?",
+      "expected_document": "N/A",
+      "expected_keyword": "abstain",
+      "is_answerable": false
+    },
+    {
+      "id": "T20",
+      "category_type": "Out-of-Scope / Unanswerable Queries",
+      "question": "Which internal employees are scheduled for corporate promotions next quarter?",
+      "expected_document": "N/A",
+      "expected_keyword": "abstain",
+      "is_answerable": false
+    }
+  ]
+}

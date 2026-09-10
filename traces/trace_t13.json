@@ -1,0 +1,48 @@
+{
+  "trace_id": "T13",
+  "timestamp": "2026-08-23T23:40:52.502014",
+  "category_type": "Cross-Document & Edge Case Queries",
+  "question": "Are digital download software licenses eligible for a refund under Section 2?",
+  "search_mode": "hybrid",
+  "top_k": 3,
+  "retrieved_chunks": [
+    {
+      "rank": 1,
+      "filename": "refund_policy.pdf",
+      "page": 1,
+      "chunk_id": "REFUND_POLICY_P1_C1",
+      "score": 0.048916,
+      "text_snippet": "Customer Refund Policy Section 1: Product Refund Standard Window Customers can request a full refund within 30 days of the original purchase date. To be eligible for a refund, the product must be unused, in its original packaging, and accompanied by "
+    },
+    {
+      "rank": 2,
+      "filename": "refund_policy.pdf",
+      "page": 2,
+      "chunk_id": "REFUND_POLICY_P2_C1",
+      "score": 0.031498,
+      "text_snippet": "Section 3: Processing Refunds Approved refunds will be processed back to the original payment method within 5 to 7 business days. Shipping costs are non-refundable unless the return is due to a verifiable company defect or error. Section 4: Exchanges"
+    },
+    {
+      "rank": 3,
+      "filename": "SS_Employee_Handbook.pdf",
+      "page": 39,
+      "chunk_id": "SS_EMPLOYEE_HANDBOOK_P39_C1",
+      "score": 0.030536,
+      "text_snippet": "39 24. CONTACT DETAILS 25. MODIFICATIONS LXXII. Sharing confidential Company information in the social media. LXXIII. Not respecting the property rights of others by never misusing their assets, intellectual property or trade secrets, including the c"
+    }
+  ],
+  "generated_answer": "Digital download software licenses are strictly non-refundable once issued or downloaded, except where required by applicable local consumer law.",
+  "sources": "- refund_policy.pdf -- Page 1 (Chunk: REFUND_POLICY_P1_C1)\n- refund_policy.pdf -- Page 2 (Chunk: REFUND_POLICY_P2_C1)\n- SS_Employee_Handbook.pdf -- Page 39 (Chunk: SS_EMPLOYEE_HANDBOOK_P39_C1)",
+  "ground_truth": {
+    "expected_document": "refund_policy.pdf",
+    "expected_keyword": "non-refundable",
+    "is_answerable": true
+  },
+  "diagnosis": {
+    "status": "PASS",
+    "category": "SUCCESS",
+    "is_retrieval_success": true,
+    "is_answer_success": true,
+    "evidence": "Correct document 'refund_policy.pdf' retrieved in top-3 and answer contained 'non-refundable'."
+  }
+}

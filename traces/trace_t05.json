@@ -1,0 +1,48 @@
+{
+  "trace_id": "T05",
+  "timestamp": "2026-08-23T23:40:42.466319",
+  "category_type": "Specific Section & Process Window Rules",
+  "question": "Within how many days must expense reports be submitted after returning from travel?",
+  "search_mode": "hybrid",
+  "top_k": 3,
+  "retrieved_chunks": [
+    {
+      "rank": 1,
+      "filename": "expense_policy.pdf",
+      "page": 2,
+      "chunk_id": "EXPENSE_POLICY_P2_C1",
+      "score": 0.048916,
+      "text_snippet": "Section 3: Expense Report Submission Expense reports must be submitted within 14 days of returning from business travel or incurring the expense. Late submissions past 30 days will not be reimbursed without Vice President approval. Section 4: Taxi & "
+    },
+    {
+      "rank": 2,
+      "filename": "expense_policy.pdf",
+      "page": 1,
+      "chunk_id": "EXPENSE_POLICY_P1_C1",
+      "score": 0.047627,
+      "text_snippet": "Company Expense & Travel Policy Section 1: Travel & Business Expenses Employees traveling on authorized company business will be reimbursed for reasonable and necessary travel expenses. Flight bookings must be made in Economy class for trips under 6 "
+    },
+    {
+      "rank": 3,
+      "filename": "refund_policy.pdf",
+      "page": 2,
+      "chunk_id": "REFUND_POLICY_P2_C1",
+      "score": 0.030536,
+      "text_snippet": "Section 3: Processing Refunds Approved refunds will be processed back to the original payment method within 5 to 7 business days. Shipping costs are non-refundable unless the return is due to a verifiable company defect or error. Section 4: Exchanges"
+    }
+  ],
+  "generated_answer": "Expense reports must be submitted within 14 days of returning from business travel.",
+  "sources": "- expense_policy.pdf -- Page 2 (Chunk: EXPENSE_POLICY_P2_C1)\n- expense_policy.pdf -- Page 1 (Chunk: EXPENSE_POLICY_P1_C1)\n- refund_policy.pdf -- Page 2 (Chunk: REFUND_POLICY_P2_C1)",
+  "ground_truth": {
+    "expected_document": "expense_policy.pdf",
+    "expected_keyword": "14 days",
+    "is_answerable": true
+  },
+  "diagnosis": {
+    "status": "PASS",
+    "category": "SUCCESS",
+    "is_retrieval_success": true,
+    "is_answer_success": true,
+    "evidence": "Correct document 'expense_policy.pdf' retrieved in top-3 and answer contained '14 days'."
+  }
+}
