@@ -14,6 +14,14 @@ from typing import List, Optional, Dict, Any
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams, PointStruct, Filter, FieldCondition, MatchValue
 
+_GLOBAL_QDRANT_STORE = None
+
+def get_qdrant_store(storage_path: str = "./data/qdrant", collection_name: str = "company_documents") -> "QdrantVectorStore":
+    global _GLOBAL_QDRANT_STORE
+    if _GLOBAL_QDRANT_STORE is None:
+        _GLOBAL_QDRANT_STORE = QdrantVectorStore(storage_path=storage_path, collection_name=collection_name)
+    return _GLOBAL_QDRANT_STORE
+
 
 class QdrantVectorStore:
     """
@@ -88,15 +96,6 @@ class QdrantVectorStore:
     ) -> List[Dict[str, Any]]:
         """
         Executes Cosine similarity search in Qdrant to find top_k relevant text chunks.
-
-        Args:
-            query_vector (List[float]): User question embedding vector.
-            top_k (int): Number of most similar chunks to return.
-            filter_department (str, optional): Filter results by department name (e.g. 'HR').
-            filter_filename (str, optional): Filter results by filename.
-
-        Returns:
-            List[Dict]: Top matching chunks with relevance score, text, and source page metadata.
         """
         must_filters = []
         
@@ -144,6 +143,5 @@ class QdrantVectorStore:
 
 
 if __name__ == "__main__":
-    # Standalone verification test
-    store = QdrantVectorStore()
+    store = get_qdrant_store()
     print("Qdrant store initialized successfully.")
