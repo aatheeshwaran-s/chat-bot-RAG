@@ -129,7 +129,7 @@ def compare_before_after():
 def main():
     """Run all demos."""
     print("\n" + "="*70)
-    print("WEEK 9: AGENT FAILURE MODES & TRAJECTORY EVALUATION")
+    print("WEEK 8: AGENT FAILURE MODES & TRAJECTORY EVALUATION")
     print("="*70)
     
     demo_trajectory_gap()
