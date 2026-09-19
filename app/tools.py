@@ -158,15 +158,28 @@ class Tool:
 
 
 class ToolRegistry:
-    def __init__(self):
+    def __init__(self, init_defaults: bool = True):
         self.tools: Dict[str, Tool] = {}
-        self._init_default_tools()
+        if init_defaults:
+            self._init_default_tools()
+        else:
+            # Ensure final_answer is always registered
+            self.register(Tool(
+                name="final_answer",
+                description="Output final decision and resolution to complete the ticket. Parameters: resolution (str).",
+                func=lambda resolution: f"FINAL RESOLUTION: {resolution}"
+            ))
 
     def register(self, tool: Tool):
         self.tools[tool.name] = tool
 
     def get_tool(self, name: str) -> Optional[Tool]:
         return self.tools.get(name)
+
+    def load_mcp_server(self, server, verbose: bool = True):
+        from app.mcp_client import MCPClientManager
+        client_mgr = MCPClientManager(verbose=verbose)
+        client_mgr.connect_and_discover(server, self)
 
     def format_tools_for_prompt(self) -> str:
         descriptions = []

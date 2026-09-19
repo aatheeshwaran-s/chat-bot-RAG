@@ -5,6 +5,12 @@ Week 9: Simple evaluation showing:
 3. Before/after comparison
 """
 
+import sys
+import io
+
+if sys.stdout.encoding.lower() != 'utf-8':
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+
 from app.trajectory_eval import TrajectoryEvaluator, AgentStep
 from app.injection_defense import InjectionDetector, InjectionDefense
 
@@ -129,7 +135,7 @@ def compare_before_after():
 def main():
     """Run all demos."""
     print("\n" + "="*70)
-    print("WEEK 9: AGENT FAILURE MODES & TRAJECTORY EVALUATION")
+    print("WEEK 8: AGENT FAILURE MODES & TRAJECTORY EVALUATION")
     print("="*70)
     
     demo_trajectory_gap()

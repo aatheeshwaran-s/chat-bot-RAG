@@ -24,6 +24,9 @@ from app.hybrid import HybridSearchEngine, BM25SearchEngine
 from app.trace_collector import collect_all_traces
 from app.error_analysis import analyze_all_traces, print_error_analysis_summary
 from app.w6_eval import evaluate_w6
+from app.agent import HandBuiltReActAgent
+from app.workflow import PlainFixedWorkflow
+from app.race import run_agent_vs_workflow_race
 
 
 def run_ingestion(chunk_size: int = 500, chunk_overlap: int = 50):
