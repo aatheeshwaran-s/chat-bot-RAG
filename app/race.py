@@ -11,7 +11,13 @@ import os
 import json
 import time
 import re
+import sys
+import io
 from typing import Dict, Any, List
+
+if sys.stdout.encoding.lower() != 'utf-8':
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+
 from app.agent import HandBuiltReActAgent
 from app.workflow import PlainFixedWorkflow
 

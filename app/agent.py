@@ -149,7 +149,7 @@ class HandBuiltReActAgent:
 
             tool = self.tool_registry.get_tool(action)
             if tool:
-                kwargs = self._parse_action_input(action_input)
+                kwargs = self._parse_action_input(action_input, action)
                 observation = tool.run(**kwargs)
             else:
                 observation = f"Unknown tool '{action}'. Valid tools are: {tool_names}"
@@ -226,7 +226,7 @@ class HandBuiltReActAgent:
 
         return thought, action, action_input
 
-    def _parse_action_input(self, action_input: str) -> Dict[str, Any]:
+    def _parse_action_input(self, action_input: str, action: str = "") -> Dict[str, Any]:
         action_input = action_input.strip()
 
         if action_input.startswith("{") and action_input.endswith("}"):
@@ -245,26 +245,61 @@ class HandBuiltReActAgent:
             if kwargs:
                 return kwargs
 
-        return {"query": action_input, "expression": action_input, "ticket_id": action_input, "resolution": action_input, "reason": action_input}
+        # Smart single-parameter mapping based on tool action name
+        act_lower = action.lower()
+        if "ticket_db" in act_lower:
+            return {"ticket_id": action_input}
+        elif "policy" in act_lower or "search" in act_lower:
+            return {"query": action_input}
+        elif "reimbursement" in act_lower or "calculate" in act_lower or "math" in act_lower:
+            return {"expression": action_input}
+        elif "escalate" in act_lower:
+            return {"ticket_id": action_input, "reason": "Policy exception"}
+        elif "history" in act_lower or "customer" in act_lower:
+            return {"name": action_input}
+        elif "final_answer" in act_lower:
+            return {"resolution": action_input}
+
+        return {"ticket_id": action_input}
+
+    def _resolve_tool_name(self, base_name: str) -> str:
+        if base_name in self.tool_registry.tools:
+            return base_name
+        for t_name in self.tool_registry.tools.keys():
+            if base_name in t_name:
+                return t_name
+        return base_name
 
     def _offline_step_fallback(self, user_prompt: str):
         prompt_lower = user_prompt.lower()
 
+        t_check_db = self._resolve_tool_name("check_ticket_db")
+        t_lookup_policy = self._resolve_tool_name("lookup_policy")
+        t_escalate = self._resolve_tool_name("escalate_ticket")
+        t_history = self._resolve_tool_name("get_customer_history")
+
         # Step 1: Initial query / ticket lookup
         if "previous steps taken:" not in prompt_lower or "no previous steps taken" in prompt_lower:
-            if "tick-" in prompt_lower:
+            if "alice" in prompt_lower:
+                return (
+                    "Lookup customer resolution history for Alice.",
+                    t_history,
+                    "name=Alice",
+                    120, 35
+                )
+            elif "tick-" in prompt_lower:
                 match = re.search(r"tick-\d+", prompt_lower)
                 tid = match.group(0).upper() if match else "TICK-101"
                 return (
                     f"Lookup metadata and status for ticket {tid}.",
-                    "check_ticket_db",
+                    t_check_db,
                     f"ticket_id={tid}",
                     120, 35
                 )
             else:
                 return (
                     "Search company policy guidelines related to the support ticket question.",
-                    "lookup_policy",
+                    t_lookup_policy,
                     f"query={user_prompt[:50]}",
                     110, 30
                 )
@@ -306,7 +341,7 @@ class HandBuiltReActAgent:
         if "tick-104" in prompt_lower or "exp-202" in prompt_lower or "45 days" in prompt_lower:
             return (
                 "Expense report submitted after 30 days (45 days late) requires Vice President approval. Escalate ticket.",
-                "escalate_ticket",
+                t_escalate,
                 "ticket_id=TICK-104, reason=Expense report submitted past 30-day policy limit (45 days) requiring Vice President approval",
                 230, 45
             )
