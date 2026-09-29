@@ -13,10 +13,10 @@ import os
 import json
 import time
 from typing import Dict, Any
-from app.tools import ToolRegistry
-from app.agent import HandBuiltReActAgent
-from app.mcp_server import mcp_server as ticket_server
-from app.secondary_mcp_server import secondary_mcp_server as policy_server
+from app.agents.tools import ToolRegistry
+from app.agents.agent import HandBuiltReActAgent
+from app.mcp.mcp_server import mcp_server as ticket_server
+from app.mcp.secondary_mcp_server import secondary_mcp_server as policy_server
 
 
 def print_section(title: str):

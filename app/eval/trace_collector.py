@@ -15,12 +15,12 @@ import os
 import json
 import datetime
 from typing import List, Dict, Any
-from app.embeddings import EmbeddingEngine
-from app.retrieval import QdrantVectorStore
-from app.generation import LLMGenerator
-from app.hybrid import HybridSearchEngine
-from app.failure_analysis import categorize_failure
-from app.ingest import process_all_documents_in_folder
+from app.rag.embeddings import EmbeddingEngine
+from app.rag.retrieval import QdrantVectorStore
+from app.rag.generation import LLMGenerator
+from app.rag.hybrid import HybridSearchEngine
+from app.eval.failure_analysis import categorize_failure
+from app.rag.ingest import process_all_documents_in_folder
 
 
 def get_traces_dir() -> str:

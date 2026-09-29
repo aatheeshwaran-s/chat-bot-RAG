@@ -17,8 +17,8 @@ import time
 import json
 from typing import Dict, Any, List, Optional
 from dotenv import load_dotenv
-from app.tools import ToolRegistry
-from app.memory import ShortTermMemory, LongTermMemory
+from app.agents.tools import ToolRegistry
+from app.agents.memory import ShortTermMemory, LongTermMemory
 
 load_dotenv()
 

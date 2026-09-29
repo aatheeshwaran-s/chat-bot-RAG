@@ -18,8 +18,8 @@ from typing import Dict, Any, List
 if sys.stdout.encoding.lower() != 'utf-8':
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
-from app.agent import HandBuiltReActAgent
-from app.workflow import PlainFixedWorkflow
+from app.agents.agent import HandBuiltReActAgent
+from app.agents.workflow import PlainFixedWorkflow
 
 
 def load_ticket_benchmark() -> List[Dict[str, Any]]:

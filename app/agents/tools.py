@@ -13,10 +13,10 @@ import ast
 import operator
 import re
 from typing import Dict, Any, List, Callable, Optional
-from app.embeddings import EmbeddingEngine
-from app.retrieval import get_qdrant_store
-from app.hybrid import HybridSearchEngine
-from app.ingest import process_all_documents_in_folder
+from app.rag.embeddings import EmbeddingEngine
+from app.rag.retrieval import get_qdrant_store
+from app.rag.hybrid import HybridSearchEngine
+from app.rag.ingest import process_all_documents_in_folder
 import os
 
 
@@ -177,7 +177,7 @@ class ToolRegistry:
         return self.tools.get(name)
 
     def load_mcp_server(self, server, verbose: bool = True):
-        from app.mcp_client import MCPClientManager
+        from app.mcp.mcp_client import MCPClientManager
         client_mgr = MCPClientManager(verbose=verbose)
         client_mgr.connect_and_discover(server, self)
 

@@ -5,7 +5,8 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak
 
 def create_pdf(filename: str, title: str, pages_content: list[str]):
     """Helper script to create sample PDF documents for testing RAG chatbot."""
-    docs_dir = os.path.join(os.path.dirname(__file__), "documents")
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    docs_dir = os.path.join(base_dir, "documents")
     os.makedirs(docs_dir, exist_ok=True)
     filepath = os.path.join(docs_dir, filename)
 

@@ -10,7 +10,7 @@ Provides a clear inspection view showing:
 """
 
 from typing import List, Dict, Any, Optional
-from app.failure_analysis import categorize_failure
+from app.eval.failure_analysis import categorize_failure
 
 
 def print_inspection_view(

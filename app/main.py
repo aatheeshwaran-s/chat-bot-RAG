@@ -14,19 +14,23 @@ Provides CLI commands:
 import sys
 import os
 import argparse
-from app.ingest import process_all_documents_in_folder
-from app.embeddings import EmbeddingEngine
-from app.retrieval import QdrantVectorStore
-from app.generation import LLMGenerator
-from app.evaluate import evaluate_rag_system, run_week4_experiment
-from app.inspection import print_inspection_view
-from app.hybrid import HybridSearchEngine, BM25SearchEngine
-from app.trace_collector import collect_all_traces
-from app.error_analysis import analyze_all_traces, print_error_analysis_summary
-from app.w6_eval import evaluate_w6
-from app.agent import HandBuiltReActAgent
-from app.workflow import PlainFixedWorkflow
-from app.race import run_agent_vs_workflow_race
+from app.rag.ingest import process_all_documents_in_folder
+from app.rag.embeddings import EmbeddingEngine
+from app.rag.retrieval import QdrantVectorStore
+from app.rag.generation import LLMGenerator
+from app.rag.hybrid import HybridSearchEngine, BM25SearchEngine
+
+from app.agents.agent import HandBuiltReActAgent
+from app.agents.workflow import PlainFixedWorkflow
+from app.agents.multi_agent import MultiAgentTriageSquad
+
+from app.eval.evaluate import evaluate_rag_system, run_week4_experiment
+from app.eval.inspection import print_inspection_view
+from app.eval.trace_collector import collect_all_traces
+from app.eval.error_analysis import analyze_all_traces, print_error_analysis_summary
+from app.eval.w6_eval import evaluate_w6
+from app.eval.race import run_agent_vs_workflow_race
+from app.eval.week10_eval import run_week10_single_vs_multi_race
 
 
 def run_ingestion(chunk_size: int = 500, chunk_overlap: int = 50):
@@ -187,6 +191,13 @@ def main():
     # Week 6 Module 3 Ticket Judge Validation & Eval commands
     subparsers.add_parser("evaluate_w6", help="Run Week 6 Ticket Reply Judge Validation & Eval Suite")
 
+    # Week 10 Module 5 Multi-Agent & Race commands
+    parser_multi = subparsers.add_parser("multi-agent", help="Run Multi-Agent Triage Squad (Manager + 2 Specialists) on support ticket")
+    parser_multi.add_argument("question", type=str, nargs="?", default="Customer Alice requested a refund for order TICK-101 purchased 12 days ago ($120). Check policy and process.", help="Ticket or question text")
+
+    subparsers.add_parser("race-multi", help="Run Week 10 Single Agent vs Multi-Agent Triage Squad Race Benchmark")
+    subparsers.add_parser("evaluate_w10", help="Run Week 10 Single Agent vs Multi-Agent Triage Squad Race Benchmark")
+
     args = parser.parse_args()
 
     if args.command == "ingest":
@@ -197,12 +208,18 @@ def main():
         agent = HandBuiltReActAgent(max_steps=args.max_steps)
         res = agent.run(args.question, verbose=True)
         print(f"\nExecution Summary: Steps={res['steps_taken']}, Time={res['total_latency']}s, Tokens={res['total_tokens']}, Est Cost=${res['estimated_cost_usd']}")
+    elif args.command == "multi-agent":
+        squad = MultiAgentTriageSquad()
+        res = squad.run(args.question, verbose=True)
+        print(f"\nExecution Summary: Steps={res['steps_taken']}, Time={res['total_latency']}s, Tokens={res['total_tokens']}, Est Cost=${res['estimated_cost_usd']}")
     elif args.command == "workflow":
         wf = PlainFixedWorkflow()
         res = wf.run(args.question, verbose=True)
         print(f"\nExecution Summary: Steps={res['steps_taken']}, Time={res['total_latency']}s, Tokens={res['total_tokens']}, Est Cost=${res['estimated_cost_usd']}")
     elif args.command == "race":
         run_agent_vs_workflow_race(verbose=True)
+    elif args.command in ("race-multi", "evaluate_w10"):
+        run_week10_single_vs_multi_race(verbose=True)
     elif args.command == "inspect":
         inspect_question(args.question)
     elif args.command == "chat":

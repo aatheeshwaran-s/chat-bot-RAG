@@ -22,7 +22,7 @@ def lookup_policy_mcp(query: str) -> str:
     """
     Simulates / connects to hybrid vector + BM25 search over MCP.
     """
-    from app.tools import get_hybrid_searcher
+    from app.agents.tools import get_hybrid_searcher
     try:
         searcher = get_hybrid_searcher()
         results = searcher.search(query, top_k=2)

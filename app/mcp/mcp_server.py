@@ -13,7 +13,7 @@ import json
 from typing import Dict, Any, Optional
 from fastmcp import FastMCP
 import ast
-from app.tools import MOCK_TICKET_DB, safe_eval
+from app.agents.tools import MOCK_TICKET_DB, safe_eval
 
 # Initialize FastMCP Server
 mcp_server = FastMCP(

@@ -11,8 +11,8 @@ import io
 if sys.stdout.encoding.lower() != 'utf-8':
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
-from app.trajectory_eval import TrajectoryEvaluator, AgentStep
-from app.injection_defense import InjectionDetector, InjectionDefense
+from app.eval.trajectory_eval import TrajectoryEvaluator, AgentStep
+from app.eval.injection_defense import InjectionDetector, InjectionDefense
 
 
 def demo_trajectory_gap():

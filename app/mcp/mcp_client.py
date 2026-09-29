@@ -10,7 +10,7 @@ import asyncio
 import json
 from typing import Dict, Any, List, Optional
 from fastmcp import FastMCP
-from app.tools import Tool, ToolRegistry
+from app.agents.tools import Tool, ToolRegistry
 
 
 class MCPClientManager:
