@@ -29,6 +29,7 @@ from app.workflow import PlainFixedWorkflow
 from app.race import run_agent_vs_workflow_race
 from app.multi_agent import MultiAgentTriageSquad
 from app.week10_eval import run_week10_single_vs_multi_race
+from app.week11_eval import RequestLogger, run_week11_production_suite, run_week11_support_drill
 
 
 def run_ingestion(chunk_size: int = 500, chunk_overlap: int = 50):
@@ -74,6 +75,16 @@ def answer_user_query(question: str, department: str = None, top_k: int = 5, fil
         )
 
     result = generator.generate_answer(question, retrieved_chunks)
+    logger = RequestLogger()
+    logger.log_request(
+        question=question,
+        mode=mode,
+        answer=result.get("answer", ""),
+        retrieved_chunks=retrieved_chunks,
+        latency_sec=0.0,
+        estimated_cost_usd=0.0,
+        status="ok" if not result.get("is_abstained") else "abstain",
+    )
 
     print("\n" + "="*60)
     print(f"[QUESTION] : {question}")
@@ -196,6 +207,12 @@ def main():
     subparsers.add_parser("race-multi", help="Run Week 10 Single Agent vs Multi-Agent Triage Squad Race Benchmark")
     subparsers.add_parser("evaluate_w10", help="Run Week 10 Single Agent vs Multi-Agent Triage Squad Race Benchmark")
 
+    # Week 11 Module 6 Production & Capstone commands
+    parser_week11 = subparsers.add_parser("week11", help="Run Week 11 production observability, cost-per-request, and failure-to-test loop")
+    parser_week11.add_argument("--complaint", type=str, default="refund after 14 days", help="Complaint keywords to use for the support-drill search")
+    subparsers.add_parser("evaluate_w11", help="Run Week 11 observability, cost, and support drill suite")
+    subparsers.add_parser("support-drill", help="Run Week 11 support drill against request logs")
+
     args = parser.parse_args()
 
     if args.command == "ingest":
@@ -218,6 +235,10 @@ def main():
         run_agent_vs_workflow_race(verbose=True)
     elif args.command in ("race-multi", "evaluate_w10"):
         run_week10_single_vs_multi_race(verbose=True)
+    elif args.command in ("week11", "evaluate_w11"):
+        run_week11_production_suite(verbose=True)
+    elif args.command == "support-drill":
+        print(run_week11_support_drill(complaint=args.complaint if hasattr(args, "complaint") else "refund after 14 days"))
     elif args.command == "inspect":
         inspect_question(args.question)
     elif args.command == "chat":
