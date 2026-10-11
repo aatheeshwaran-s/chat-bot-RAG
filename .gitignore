@@ -16,3 +16,6 @@ venv/
 
 # Downloaded models cache
 models/
+
+# Runtime logs
+logs/

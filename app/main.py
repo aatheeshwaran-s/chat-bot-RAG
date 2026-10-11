@@ -55,6 +55,9 @@ def run_ingestion(chunk_size: int = 500, chunk_overlap: int = 50):
 
 
 def answer_user_query(question: str, department: str = None, top_k: int = 5, filename: str = None, mode: str = "vector"):
+    import time
+    t0 = time.time()
+
     engine = EmbeddingEngine()
     store = QdrantVectorStore()
     generator = LLMGenerator()
@@ -75,16 +78,24 @@ def answer_user_query(question: str, department: str = None, top_k: int = 5, fil
         )
 
     result = generator.generate_answer(question, retrieved_chunks)
+    elapsed = max(0.01, round(time.time() - t0, 3))
+
+    total_prompt_chars = len(question) + sum(len(c.get("text", "")) for c in retrieved_chunks)
+    prompt_tokens = max(1, total_prompt_chars // 4)
+    completion_tokens = max(1, len(result.get("answer", "")) // 4)
+    est_cost = round((prompt_tokens * 0.00000015) + (completion_tokens * 0.0000006), 6)
+
     logger = RequestLogger()
-    logger.log_request(
+    entry = logger.log_request(
         question=question,
         mode=mode,
         answer=result.get("answer", ""),
         retrieved_chunks=retrieved_chunks,
-        latency_sec=0.0,
-        estimated_cost_usd=0.0,
+        latency_sec=elapsed,
+        estimated_cost_usd=est_cost,
         status="ok" if not result.get("is_abstained") else "abstain",
     )
+    logger.flush()
 
     print("\n" + "="*60)
     print(f"[QUESTION] : {question}")
@@ -95,6 +106,9 @@ def answer_user_query(question: str, department: str = None, top_k: int = 5, fil
     print(f"[ANSWER]   :\n{result['answer']}")
     print("-" * 60)
     print(f"[SOURCES]  :\n{result['sources']}")
+    print("="*60)
+    print(f"[OBSERVABILITY] Latency: {elapsed}s | Est Cost: ${est_cost} | Trace ID: {entry.get('trace_id')}")
+    print(f"[LANGFUSE] Trace pushed to Langfuse Cloud")
     print("="*60)
 
     return result
@@ -134,6 +148,7 @@ def start_interactive_chat():
     print("=======================================================\n")
 
     agent = HandBuiltReActAgent()
+    logger = RequestLogger()
 
     while True:
         try:
@@ -146,6 +161,17 @@ def start_interactive_chat():
 
             result = agent.run(user_input, verbose=True)
             print(f"\n[SUMMARY] Steps: {result['steps_taken']} | Time: {result['total_latency']}s | Tokens: {result['total_tokens']} | Cost: ${result['estimated_cost_usd']}")
+
+            entry = logger.log_request(
+                question=user_input,
+                mode="react-agent",
+                answer=result.get("final_answer", ""),
+                latency_sec=float(result.get("total_latency", 0.0)),
+                estimated_cost_usd=float(result.get("estimated_cost_usd", 0.0)),
+                status="ok" if not result.get("is_stopped_early") else "error",
+            )
+            logger.flush()
+            print(f"[LANGFUSE] Trace recorded: {entry.get('trace_id')}")
         except KeyboardInterrupt:
             print("\nSession ended.")
             break
