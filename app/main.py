@@ -213,9 +213,48 @@ def main():
     subparsers.add_parser("evaluate_w11", help="Run Week 11 observability, cost, and support drill suite")
     subparsers.add_parser("support-drill", help="Run Week 11 support drill against request logs")
 
+    # Week 12 Capstone Command
+    parser_capstone = subparsers.add_parser("capstone", help="Run Week 12 Capstone Tier-1 Deflection Assistant")
+    parser_capstone.add_argument("--ticket", type=str, default=None, help="Specific support ticket query text")
+    parser_capstone.add_argument("--eval", action="store_true", help="Run full 30-case Capstone Integrated Eval Suite")
+    parser_capstone.add_argument("--trajectory", action="store_true", help="Run 10-case Trajectory Evaluation & Gap benchmark")
+    parser_capstone.add_argument("--second-contact", action="store_true", help="Run Bonus Second-Contact & Re-Open Simulation")
+    parser_capstone.add_argument("--failure-loop", action="store_true", help="Run Closed Failure-to-Test Loop regression test")
+    parser_capstone.add_argument("--fresh-eyes", action="store_true", help="Run Thursday's Fresh-Eyes MCP Reviewer test")
+
+    subparsers.add_parser("evaluate_capstone", help="Run full 30-case Capstone Integrated Eval Suite")
+
     args = parser.parse_args()
 
-    if args.command == "ingest":
+    if args.command in ("capstone", "evaluate_capstone"):
+        if getattr(args, "eval", False) or args.command == "evaluate_capstone":
+            from app.capstone_eval import run_capstone_eval_suite
+            run_capstone_eval_suite(verbose=True)
+        elif getattr(args, "trajectory", False):
+            from app.capstone_trajectory import run_capstone_trajectory_eval
+            run_capstone_trajectory_eval(verbose=True)
+        elif getattr(args, "second_contact", False):
+            from app.capstone_second_contact import run_second_contact_evaluation
+            run_second_contact_evaluation(verbose=True)
+        elif getattr(args, "failure_loop", False):
+            import unittest
+            suite = unittest.defaultTestLoader.loadTestsFromName("tests.test_closed_failure_loop")
+            runner = unittest.TextTestRunner(verbosity=2)
+            runner.run(suite)
+        elif getattr(args, "fresh_eyes", False):
+            from fresh_eyes_client import run_fresh_eyes_review
+            run_fresh_eyes_review()
+        else:
+            from app.capstone_agent import Tier1DeflectionAssistant
+            ticket = args.ticket if getattr(args, "ticket", None) else (
+                "Customer Charlie (Order #ORD-503) requests a refund for wireless headset purchased 18 days ago ($85.00). "
+                "The old macro says 14 days is expired. Can we approve?"
+            )
+            agent = Tier1DeflectionAssistant(verbose=True)
+            res = agent.run(ticket)
+            print(f"\n[CAPSTONE SUMMARY] Ticket={res['ticket_id']} | Deflected={res['deflected']} | "
+                  f"Citation={res['cited_policy_slug']} | Time={res['latency_ms']}ms | Cost=${res['cost_usd']}")
+    elif args.command == "ingest":
         run_ingestion(chunk_size=args.chunk_size, chunk_overlap=args.overlap)
     elif args.command == "query":
         answer_user_query(args.question, department=args.department, filename=args.filename, mode=args.mode)
