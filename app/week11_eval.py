@@ -4,14 +4,53 @@ import uuid
 from datetime import datetime, timezone
 from typing import Any, Dict, Iterable, List, Optional
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
+try:
+    from langfuse import Langfuse
+    _LANGFUSE_AVAILABLE = True
+except ImportError:
+    _LANGFUSE_AVAILABLE = False
+
 
 class RequestLogger:
-    """Append-only request log for production observability and support drills."""
+    """Production observability logger integrating Langfuse cloud tracing and local append-only logs."""
 
-    def __init__(self, log_path: Optional[str] = None):
+    def __init__(
+        self,
+        log_path: Optional[str] = None,
+        public_key: Optional[str] = None,
+        secret_key: Optional[str] = None,
+        host: Optional[str] = None,
+        use_langfuse: bool = True,
+    ):
         base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.log_path = log_path or os.path.join(base_dir, "logs", "request_log.jsonl")
         os.makedirs(os.path.dirname(self.log_path), exist_ok=True)
+
+        self.use_langfuse = use_langfuse and _LANGFUSE_AVAILABLE
+        self.langfuse: Optional[Any] = None
+        if self.use_langfuse:
+            pk = public_key or os.getenv("LANGFUSE_PUBLIC_KEY")
+            sk = secret_key or os.getenv("LANGFUSE_SECRET_KEY")
+            h = host or os.getenv("LANGFUSE_HOST") or os.getenv("LANGFUSE_BASE_URL") or "https://cloud.langfuse.com"
+            if pk:
+                pk = pk.strip(' "\'')
+            if sk:
+                sk = sk.strip(' "\'')
+            if h:
+                h = h.strip(' "\'')
+            try:
+                if pk and sk:
+                    self.langfuse = Langfuse(public_key=pk, secret_key=sk, host=h)
+                else:
+                    self.langfuse = Langfuse()
+            except Exception:
+                self.langfuse = None
 
     def log_request(
         self,
@@ -23,10 +62,66 @@ class RequestLogger:
         estimated_cost_usd: float = 0.0,
         trace_id: Optional[str] = None,
         status: str = "ok",
+        time_to_first_token_sec: Optional[float] = None,
         **extra: Any,
     ) -> Dict[str, Any]:
+        langfuse_trace_id = None
+        if self.langfuse:
+            try:
+                import time
+                from datetime import timedelta
+                resolved_model = extra.get("model") or os.getenv("OPENROUTER_MODEL", "google/gemini-2.5-flash")
+                start_ns = time.time_ns()
+                cost_dict = {"total": float(estimated_cost_usd)} if estimated_cost_usd else None
+                approx_tokens = (len(question) + len(answer)) // 4
+                usage_dict = {"total": max(1, approx_tokens), "input": max(1, len(question) // 4), "output": max(1, len(answer) // 4)}
+
+                ttft = time_to_first_token_sec or extra.get("ttft")
+                completion_start = (datetime.now(timezone.utc) + timedelta(seconds=float(ttft))) if ttft and float(ttft) > 0 else None
+
+                obs = self.langfuse.start_observation(
+                    name=f"rag_query_{mode}",
+                    as_type="generation",
+                    model=resolved_model,
+                    input={"question": question, "mode": mode},
+                    completion_start_time=completion_start,
+                    metadata={
+                        "retrieved_chunk_count": len(retrieved_chunks or []),
+                        "status": status,
+                        "latency_sec": latency_sec,
+                        "time_to_first_token_sec": ttft,
+                        **extra,
+                    },
+                    cost_details=cost_dict,
+                    usage_details=usage_dict,
+                )
+                obs.update(
+                    output={"answer": answer},
+                    metadata={
+                        "latency_sec": latency_sec,
+                        "status": status,
+                        "chunks": [c.get("filename", "") for c in (retrieved_chunks or []) if isinstance(c, dict)],
+                    },
+                    cost_details=cost_dict,
+                    usage_details=usage_dict,
+                )
+                if latency_sec and float(latency_sec) > 0:
+                    end_ns = start_ns + int(float(latency_sec) * 1e9)
+                    obs.end(end_time=end_ns)
+                else:
+                    obs.end()
+                tid = getattr(obs, "trace_id", None) or getattr(obs, "id", None)
+                if tid and tid != "0" * 32:
+                    langfuse_trace_id = str(tid)
+            except Exception:
+                pass
+
+        resolved_trace_id = trace_id or langfuse_trace_id or f"trace-{uuid.uuid4().hex[:8]}"
+
         entry = {
-            "trace_id": trace_id or f"trace-{uuid.uuid4().hex[:8]}",
+            "trace_id": resolved_trace_id,
+            "langfuse_trace_id": langfuse_trace_id,
+            "langfuse_enabled": bool(self.langfuse is not None),
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "question": question,
             "mode": mode,
@@ -42,6 +137,17 @@ class RequestLogger:
             fh.write(json.dumps(entry, ensure_ascii=False) + "\n")
 
         return entry
+
+    def flush(self) -> None:
+        """Flush pending Langfuse events to remote host."""
+        if self.langfuse and hasattr(self.langfuse, "flush"):
+            try:
+                self.langfuse.flush()
+            except Exception:
+                pass
+
+    def get_langfuse_client(self) -> Optional[Any]:
+        return self.langfuse
 
     def load_requests(self) -> List[Dict[str, Any]]:
         if not os.path.exists(self.log_path):
@@ -77,6 +183,9 @@ class RequestLogger:
 
         matches.sort(key=lambda item: item.get("match_score", 0), reverse=True)
         return matches[:max_hits]
+
+
+LangfuseRequestLogger = RequestLogger
 
 
 def run_week11_support_drill(logs: Optional[List[Dict[str, Any]]] = None, complaint: str = "") -> Dict[str, Any]:
@@ -153,6 +262,7 @@ def run_week11_production_suite(verbose: bool = True) -> Dict[str, Any]:
             "retrieved_chunks": [{"filename": "refund_policy.pdf", "page": 2, "text": "Refunds allowed within 14 days only."}],
             "latency_sec": 1.34,
             "estimated_cost_usd": 0.0046,
+            "time_to_first_token_sec": 0.38,
             "status": "ok",
         },
         {
@@ -162,11 +272,13 @@ def run_week11_production_suite(verbose: bool = True) -> Dict[str, Any]:
             "retrieved_chunks": [{"filename": "refund_policy.pdf", "page": 2, "text": "Refunds allowed within 14 days only."}],
             "latency_sec": 1.41,
             "estimated_cost_usd": 0.0049,
+            "time_to_first_token_sec": 0.42,
             "status": "bad-answer",
         },
     ]
 
     saved = [logger.log_request(**entry) for entry in sample_requests]
+    logger.flush()
 
     cost_report = run_week11_cost_reduction(baseline_cost_usd=0.010, optimized_cost_usd=0.006, requests=100)
     support_drill = run_week11_support_drill(logs=saved, complaint="refund after 14 days")

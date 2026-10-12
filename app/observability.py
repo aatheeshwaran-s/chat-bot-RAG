@@ -1,5 +1,6 @@
 from app.week11_eval import (
     RequestLogger,
+    LangfuseRequestLogger,
     build_week11_regression_case,
     run_week11_cost_reduction,
     run_week11_production_suite,
@@ -8,6 +9,7 @@ from app.week11_eval import (
 
 __all__ = [
     "RequestLogger",
+    "LangfuseRequestLogger",
     "build_week11_regression_case",
     "run_week11_cost_reduction",
     "run_week11_production_suite",
