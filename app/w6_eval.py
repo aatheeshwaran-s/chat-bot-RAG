@@ -255,12 +255,14 @@ def calculate_ragas_metrics(case: Dict[str, Any]) -> Dict[str, float]:
 
 def run_week6_evaluation_suite() -> Dict[str, Any]:
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    test_file = os.path.join(base_dir, "tests", "ticket_eval_set.json")
+    test_file = os.path.join(base_dir, "tests", "w6_eval_set.json")
+    if not os.path.exists(test_file):
+        test_file = os.path.join(base_dir, "tests", "ticket_eval_set.json")
     labels_file = os.path.join(base_dir, "labels_25.json")
 
     with open(test_file, "r", encoding="utf-8") as f:
         data = json.load(f)
-        eval_cases = data["ticket_eval_set"]
+        eval_cases = data.get("ticket_eval_set") or data.get("tickets", [])
 
     with open(labels_file, "r", encoding="utf-8") as f:
         labels_data = json.load(f)
