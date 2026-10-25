@@ -6,3 +6,4 @@ openai>=1.0.0
 reportlab>=4.0.0
 rank-bm25>=0.2.2
 langfuse>=2.0.0
+streamlit>=1.43.0

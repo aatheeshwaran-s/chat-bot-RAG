@@ -247,10 +247,21 @@ def main():
     parser_capstone.add_argument("--second-contact", action="store_true", help="Run Bonus Second-Contact & Re-Open Simulation")
     parser_capstone.add_argument("--failure-loop", action="store_true", help="Run Closed Failure-to-Test Loop regression test")
     parser_capstone.add_argument("--fresh-eyes", action="store_true", help="Run Thursday's Fresh-Eyes MCP Reviewer test")
+    parser_capstone.add_argument("--ui", action="store_true", help="Launch interactive Streamlit web UI")
 
     subparsers.add_parser("evaluate_capstone", help="Run full 30-case Capstone Integrated Eval Suite")
+    subparsers.add_parser("ui", help="Launch interactive Streamlit web dashboard")
 
     args = parser.parse_args()
+
+    if getattr(args, "command", "") == "ui" or (args.command in ("capstone", "evaluate_capstone") and getattr(args, "ui", False)):
+        import subprocess
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        app_path = os.path.join(base_dir, "streamlit_app.py")
+        print(f"\n[STREAMLIT UI] Launching interactive dashboard: {app_path}")
+        print("[STREAMLIT UI] Local URL: http://localhost:8501\n")
+        subprocess.run([sys.executable, "-m", "streamlit", "run", app_path], cwd=base_dir)
+        return
 
     if args.command in ("capstone", "evaluate_capstone"):
         if getattr(args, "eval", False) or args.command == "evaluate_capstone":
