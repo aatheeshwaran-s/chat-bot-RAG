@@ -260,11 +260,8 @@ def main():
     args = parser.parse_args()
 
     if getattr(args, "command", "") == "ngrok":
-        from share_url import share_with_ngrok, share_with_localtunnel
-        if args.token or os.getenv("NGROK_AUTHTOKEN"):
-            share_with_ngrok(authtoken=args.token, port=args.port)
-        else:
-            share_with_localtunnel(port=args.port)
+        from share_url import share_with_ngrok
+        share_with_ngrok(authtoken=args.token, port=args.port)
         return
 
     if getattr(args, "command", "") == "ui" or (args.command in ("capstone", "evaluate_capstone") and getattr(args, "ui", False)):
