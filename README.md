@@ -64,6 +64,7 @@ python -m app.main capstone
 | `python -m app.main capstone --fresh-eyes` | Run external reviewer client simulating Squad 4 MCP consumer | 3 live MCP tool calls over JSON-RPC protocol |
 | `python -m app.main ui` *(or `--ui`)* | **Launch Interactive Streamlit Web UI** | Rich web dashboard at `http://localhost:8501` for live triage, direct RAG, trace auditing & evals |
 | `streamlit run streamlit_app.py` | Run Streamlit app directly | Native Streamlit server command |
+| `python -m app.main ngrok` | **Deploy Public URL via Ngrok** | Expose Streamlit dashboard to public URL via Ngrok / tunnel |
 
 ---
 

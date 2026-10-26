@@ -252,7 +252,17 @@ def main():
     subparsers.add_parser("evaluate_capstone", help="Run full 30-case Capstone Integrated Eval Suite")
     subparsers.add_parser("ui", help="Launch interactive Streamlit web dashboard")
 
+    # Ngrok tunnel command
+    parser_ngrok = subparsers.add_parser("ngrok", help="Deploy public tunnel via Ngrok or localtunnel")
+    parser_ngrok.add_argument("--token", type=str, default=None, help="Ngrok authtoken")
+    parser_ngrok.add_argument("--port", type=int, default=8501, help="Port to forward (default: 8501)")
+
     args = parser.parse_args()
+
+    if getattr(args, "command", "") == "ngrok":
+        from share_url import share_with_ngrok
+        share_with_ngrok(authtoken=args.token, port=args.port)
+        return
 
     if getattr(args, "command", "") == "ui" or (args.command in ("capstone", "evaluate_capstone") and getattr(args, "ui", False)):
         import subprocess
